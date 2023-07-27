@@ -24,7 +24,7 @@ body {
   border-radius: 50%;
   background: white;
   pointer-events: none;
-  transform: translate(-50%, -50%);
+  transform: translateX(-50%, -50%);
   z-index: 99999;
 }
 
@@ -472,5 +472,12 @@ content: url(img/leetcode-hover.png);
   .icon {
   height: 10vw;
   width: 10vw;
+  }
+
+  *{
+    cursor: auto;
+  }
+  .cursor-light {
+    display: none;
   }
 }
