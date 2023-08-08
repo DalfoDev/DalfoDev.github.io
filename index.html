@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <link rel="stylesheet" href="styles.css">
+  <script src="script.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>&lt;Dominic/&gt; Portfolio</title>
+</head>
+<body>
+  <div class="menu" onclick="toggleNavBar()">
+    <div class="line"></div>
+    <div class="line"></div>
+  </div>
+
+  <div class="menu-nav-bar" id="navBar">
+    <a class="fade-in-element menu-link" href="#cover">Home</a>
+    <a class="fade-in-element menu-link" href="#about">About</a>
+    <a class="fade-in-element menu-link" href="#projects">Projects</a>
+    <a class="fade-in-element menu-link" href="#contact">Contact</a>
+  </div>
+  
+
+  <div class="navbar" id="navbar">
+    <a href="#cover">Home</a>
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </div>
+
+  <div class="intro" id="cover">
+    <h1>Hello, my name is Dominic Alfonso, a...</h1>
+    <h2>&lt; <span class="typed-text"></span> &gt;</h2>
+  </div>
+  <h2 class="subtitle">About/&gt;</h2>
+  <div class="about-me" id="about">
+    <div class="content">
+      <p><span class="_def">class</span> <span class="_class">Person</span>:</p>
+      <p>·· <span class="_object">def</span> <span class="_init">__init__</span>(<span class="_pera">self</span>):</p>
+      <p>···· <span class="_object">self</span>.name = <span class="_string">"Dominic Alfonso"</span></p>
+      <p>···· <span class="_object">self</span>.birthdate = <span class="_num">02122005</span></p>
+      <p>···· <span class="_object">self</span>.homeland = <span class="_string">"Philippines"</span></p>
+      <p>···· <span class="_object">self</span>.goal = <span class="_string">"To foster innovation and technological advancement for the betterment of society."</span></p>
+      <p>···· <span class="_object">self</span>.values = <span class="_bracket">[<span class="_string">"respect", "trustworthiness", "accountability", "collaboration", "empathy"</span>]</span></p>
+      <p>···· <span class="_object">self</span>.hobbies = <span class="_bracket">[<span class="_string">"playing the piano", "playing basketball", "gaming", "watching anime"</span>]</span></p>
+      <p>···· <span class="_object">self</span>.skills = <span class="_bracket">[<span class="_string">"HTML/CSS/JS", "Python", "DaVinci Resolve", "Sketchbook", "Google Workspace", "<span id="cursor">|</span>"</span>]</span></p>
+      <p>···· <span class="_object">self</span>.education = <span class="_bracket">[(<span class="_string">"Harbor Teacher Prep Academy", "High School Diploma"</span>), (<span class="_string">"Los Angeles Harbor College", "A.A. Liberal Arts and Sciences: Arts and Humanities"</span>), (<span class="_string">"California State University Long Beach", "<span id="cursor">|</span>"</span>)])</span></p>
+    </div>
+  </div>
+
+  <div class="project" id="projects">
+    <h2 class="subtitle">Projects/&gt;</h2>
+    <div class="card-container">
+      <div class="card">
+        <div class="card-front">
+          <img src="img/tictactoe_ai.png" alt="tictactoe">
+        </div>
+        <div class="card-back">
+          <p>The code implements a Tic Tac Toe game with adjustable difficulty levels for AI opponents. The AI difficulties range from easy (random moves) to impossible (optimal moves using Minimax with alpha-beta pruning). Players take turns placing marks on the board, aiming to form a line of three marks horizontally, vertically, or diagonally to win the game.</p>
+          <a href="https://github.com/dominicAlfonso/tictactoe.ai.git" class="button" target="_blank">&lt;code&gt;</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-front">
+          <img src="img/calculator_fin.png" alt="calculator">
+        </div>
+        <div class="card-back">
+          <p>This user-friendly calculator app enables basic arithmetic operations, built with HTML, CSS, and JavaScript. HTML defines layout and structure, CSS enhances visual appeal, setting colors, fonts, and spacing, while JavaScript handles interactions, calculations, and display updates.</p>
+          <a href="https://github.com/dominicAlfonso/calculator.git" class="button" target="_blank">&lt;code&gt;</a>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-front">
+          <img src="img/chess_fin.png" alt="calculator">
+        </div>
+        <div class="card-back">
+          <p>This application visually renders a chessboard and pieces using the Chessboard class. Pieces class manages icons. Running the app displays the board with pieces following a given FEN string, showcasing the game state.</p>
+          <a href="https://github.com/dominicAlfonso/chessboard.git" class="button" target="_blank">&lt;code&gt;</a>
+        </div>
+      </div>
+
+  <div class="contact" id="contact">
+    <h2 class="subtitle">Contact Me/&gt;</h2>
+    <p id="txt">Find me on:</p>
+    <div class="container">
+      <div class="centered-elements">
+
+        <span id = "linkedIn">
+           <a href="https://www.linkedin.com/in/dominic-alfonso" target="_blank">
+              <div class="combine">
+                <img src="img/in.png" alt="linkedIn" class="icon">
+               <p class = "linkedIn">in/dominic-alfonso</p>
+             </div>
+           </a>
+        </span>
+     
+        <span id = "gitHub">
+         <a href="https://github.com/dominicAlfonso" target="_blank">
+           <div class="combine">
+             <img src="img/git.png" alt="gitHub" class="icon">
+             <p class = "gitHub">github.com/dominicAlfonso</p>
+           </div>
+         </a>
+        </span>
+
+        <span id = "leetcode">
+          <a href="https://leetcode.com/Dominic-Alfonso/" target="_blank">
+            <div class="combine">
+             <img src="img/leetcode.png" alt="leetcode" class="icon">
+              <p class = "leetcode">leetcode.com/Dominic-Alfonso/</p>
+           </div>
+          </a>
+        </span>
+
+        <span id = "mail">
+          <a href="mailto:dominic21205@gmail.com" target="_blank">
+            <div class="combine">
+              <img src="img/mail.png" alt="mail" class="icon">
+              <p class = "mail">dominic21205@gmail.com</p>
+           </div>
+          </a>
+        </span>
+
+
+
+
+
+      </div>
+    </div>
+  </div>
+</body>
+</html>
