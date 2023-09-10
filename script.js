@@ -1,6 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
   const navbar = document.getElementById('navbar');
-  const sections = document.querySelectorAll('.section');
   const navbarHeight = navbar.offsetHeight;
   const scrollThreshold = 50;
   let isNavbarPill = false;
@@ -72,7 +71,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const typingDelay = 100;
   const erasingDelay = 50;
   const newTextDelay = 2000;
-
   let currentIndex = 0;
   let typingTimer = null;
 
@@ -98,18 +96,18 @@ document.addEventListener('DOMContentLoaded', () => {
 
   type();
 
-  const createLightElement = (left, top) => {
+  function createLightElement(left, top) {
     const light = document.createElement('div');
     light.classList.add('cursor-light');
     light.style.left = left + 'px';
     light.style.top = top + 'px';
     document.body.appendChild(light);
     return light;
-  };
+  }
 
-  const removeLightElement = (light) => {
+  function removeLightElement(light) {
     document.body.removeChild(light);
-  };
+  }
 
   document.addEventListener('mousemove', (event) => {
     const mouseX = event.clientX + window.pageXOffset;
@@ -126,8 +124,6 @@ document.addEventListener('DOMContentLoaded', () => {
       removeLightElement(light);
     }, 1000);
   });
-
-
 
   const lines = document.querySelectorAll('.line');
 
@@ -188,16 +184,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     cards.forEach((card, index) => {
       if (cardContainerRect.top < windowHeight) {
-        card.style.animationDelay = `${index * 200}ms`; // Calculate the delay based on the card's position
+        card.style.animationDelay = `${index * 200}ms`;
         card.classList.add("fadeInTop");
       }
     });
   }
 
-  // Initial check for cards in the viewport
   handleScroll();
-
-  // Add the scroll event listener
   window.addEventListener("scroll", handleScroll);
-  
 });
