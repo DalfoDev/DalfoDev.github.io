@@ -13,7 +13,16 @@ body {
   font-family: Arial, sans-serif;
   color: #FAF6F2;
   background: rgb(0, 80, 163);
-  background: linear-gradient(180deg, #284B63 0%, #22181C 98%);
+background: linear-gradient(180deg, #284b63
+,#2d445c
+,#313d55
+,#33374c
+,#333144
+,#322b3b
+,#302532
+,#2c212a
+,#271c23
+,#22181c);
 }
 
 /* Cursor light */
@@ -317,7 +326,7 @@ a:hover .cursor-light {
 .card-front img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* Adjust the object-fit property as per your preference */
+  object-fit: cover; /* Adjust the object-fit property */
   border-radius: 30px;
 }
 
@@ -331,26 +340,12 @@ a:hover .cursor-light {
   opacity: 1;
 }
 
-@keyframes fade-in {
-  from {
-    opacity: 0;
-    transform: translateY(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.card-container .card {
-  animation: fade-in 0.5s ease-in-out;
-}
-
 .card.card-no-flip:hover .card-front,
 .card.card-no-flip:hover .card-back {
   transform: none;
   opacity: 1;
 }
+
 
 .button {
   position: absolute;
@@ -456,6 +451,10 @@ content: url(img/leetcode-hover.png);
     color: #0c06f7;
 }
 
+
+
+
+
 @media (max-width: 768px) {
   .navbar.pill, .navbar {
     display: none;
@@ -491,3 +490,95 @@ content: url(img/leetcode-hover.png);
     cursor: auto;
   }
 }
+
+
+
+.fadeInTop{
+  -webkit-animation: fadeInTop 1.25s both;
+  -moz-animation: fadeInTop 1.25s both;
+  -o-animation: fadeInTop 1.25s both;
+  animation: fadeInTop 1.25s both;
+}
+
+@-webkit-keyframes fadeInTop{
+  0%{
+    opacity: 0;
+
+    -webkit-transform: translateY(-50px);
+  }
+  100%{
+    opacity: 1;
+
+    -webkit-transform: translateY(0px);
+  }
+}
+
+
+@-moz-keyframes fadeInTop{
+  0%{
+    opacity: 0;
+    -moz-transform: translateY(-50px);
+  }
+  100%{
+    opacity: 1;
+    -moz-transform: translateY(0px);
+  }
+}
+
+@-o-keyframes fadeInTop{
+  0%{
+    opacity: 0;
+    -o-transform: translateY(-50px);
+  }
+  100%{
+    opacity: 1;
+    -o-transform: translateY(0px);
+  }
+}
+
+@keyframes fadeInTop{
+  0%{
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  100%{
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+
+
+
+/*
+.fadeInExpand{
+  -webkit-animation: fadeInExpand 1.5s both;
+  -moz-animation: fadeInExpand 1.5s both;
+  -o-animation: fadeInExpand 1.5s both;
+  animation: fadeInExpand 1.5s both;
+
+}
+
+@-webkit-keyframes fadeInExpand{
+  0%{
+    opacity: 0;
+    -webkit-transform: scale(0.95);
+  }
+  100%{
+    opacity: 1;
+
+    -webkit-transform: scale(1);
+  }
+}
+
+@keyframes fadeInExpand{
+  0%{
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  100%{
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+*/
