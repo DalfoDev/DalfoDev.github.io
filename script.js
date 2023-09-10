@@ -1,10 +1,10 @@
-// JavaScript for smooth scrolling and navbar animation
 document.addEventListener('DOMContentLoaded', () => {
   const navbar = document.getElementById('navbar');
   const sections = document.querySelectorAll('.section');
   const navbarHeight = navbar.offsetHeight;
-  const scrollThreshold = 50; // Adjust this value as needed
+  const scrollThreshold = 50;
   let isNavbarPill = false;
+  let isProjectsVisible = false;
 
   window.addEventListener('scroll', toggleNavbar);
 
@@ -18,6 +18,29 @@ document.addEventListener('DOMContentLoaded', () => {
       navbar.classList.remove('pill');
       isNavbarPill = false;
     }
+
+    const projectsSection = document.getElementById('projects');
+    if (isInViewport(projectsSection) && !isProjectsVisible) {
+      animateCards();
+      isProjectsVisible = true;
+    }
+  }
+
+  function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+      rect.top >= 0 &&
+      rect.bottom <= (window.innerHeight || document.documentElement.clientHeight)
+    );
+  }
+
+  function animateCards() {
+    const cards = document.querySelectorAll('.card');
+
+    cards.forEach((card, index) => {
+      const delay = index * 100;
+      card.style.animationDelay = `${delay}ms`;
+    });
   }
 
   const links = document.querySelectorAll('.navbar a');
@@ -40,17 +63,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const mobileMenuLinks = document.querySelectorAll('.menu-nav-bar a');
   mobileMenuLinks.forEach(link => {
     link.addEventListener('click', () => {
-      // Call toggleNavBar() to close the menu
       toggleNavBar();
     });
   });
 
-  // Typing animation
   const typedTextElement = document.querySelector('.typed-text');
   const textToType = 'Software_Engineer';
-  const typingDelay = 100; // Adjust typing speed (milliseconds)
-  const erasingDelay = 50; // Adjust erasing speed (milliseconds)
-  const newTextDelay = 2000; // Delay between erasing and typing (milliseconds)
+  const typingDelay = 100;
+  const erasingDelay = 50;
+  const newTextDelay = 2000;
 
   let currentIndex = 0;
   let typingTimer = null;
@@ -77,7 +98,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   type();
 
-  // Light
   const createLightElement = (left, top) => {
     const light = document.createElement('div');
     light.classList.add('cursor-light');
@@ -107,84 +127,77 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 1000);
   });
 
-  const cards = document.querySelectorAll('.card');
-
-cards.forEach((card, index) => {
-  const delay = index * 100; // Adjust the delay timing as per your preference
-  card.style.animationDelay = `${delay}ms`;
-});
 
 
-const lines = document.querySelectorAll('.line');
-
-lines.forEach(line => {
-  line.addEventListener('click', () => {
-    lines.forEach(line => line.classList.toggle('active'));
-  });
-});
-
-});
-
-let isNavBarVisible = false;
-let isMobileViewport = window.innerWidth <= 768; // Check if viewport is initially in mobile mode
-
-function toggleNavBar() {
-  const navBar = document.getElementById("navBar");
   const lines = document.querySelectorAll('.line');
 
-  if (isMobileViewport) {
-    if (!isNavBarVisible) {
-      navBar.style.display = "block";
-      fadeInElements();
-      lines.forEach(line => line.classList.add('active'));
-      isNavBarVisible = true;
-    } else {
+  lines.forEach(line => {
+    line.addEventListener('click', () => {
+      lines.forEach(line => line.classList.toggle('active'));
+    });
+  });
+
+  let isNavBarVisible = false;
+  let isMobileViewport = window.innerWidth <= 768;
+
+  function toggleNavBar() {
+    const navBar = document.getElementById("navBar");
+    const lines = document.querySelectorAll('.line');
+
+    if (isMobileViewport) {
+      if (!isNavBarVisible) {
+        navBar.style.display = "block";
+        fadeInElements();
+        lines.forEach(line => line.classList.add('active'));
+        isNavBarVisible = true;
+      } else {
+        removeFadeInClass();
+        lines.forEach(line => line.classList.remove('active'));
+        setTimeout(function () {
+          navBar.style.display = "none";
+          isNavBarVisible = false;
+        }, 500);
+      }
+    }
+  }
+
+  window.addEventListener('resize', function () {
+    const newIsMobileViewport = window.innerWidth <= 768;
+
+    if (!newIsMobileViewport && isNavBarVisible) {
+      const navBar = document.getElementById("navBar");
+      const lines = document.querySelectorAll('.line');
+
       removeFadeInClass();
       lines.forEach(line => line.classList.remove('active'));
-      setTimeout(function() {
+      setTimeout(function () {
         navBar.style.display = "none";
         isNavBarVisible = false;
       }, 500);
     }
-  }
-}
 
-// Event listener to detect changes in viewport width
-window.addEventListener('resize', function() {
-  const newIsMobileViewport = window.innerWidth <= 768;
+    isMobileViewport = newIsMobileViewport;
+  });
 
-  if (!newIsMobileViewport && isNavBarVisible) {
-    const navBar = document.getElementById("navBar");
-    const lines = document.querySelectorAll('.line');
-    
-    removeFadeInClass();
-    lines.forEach(line => line.classList.remove('active'));
-    setTimeout(function() {
-      navBar.style.display = "none";
-      isNavBarVisible = false;
-    }, 500);
+  const cardContainer = document.querySelector(".card-container");
+  const cards = document.querySelectorAll(".card");
+
+  function handleScroll() {
+    const cardContainerRect = cardContainer.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+
+    cards.forEach((card, index) => {
+      if (cardContainerRect.top < windowHeight) {
+        card.style.animationDelay = `${index * 200}ms`; // Calculate the delay based on the card's position
+        card.classList.add("fadeInTop");
+      }
+    });
   }
+
+  // Initial check for cards in the viewport
+  handleScroll();
+
+  // Add the scroll event listener
+  window.addEventListener("scroll", handleScroll);
   
-  isMobileViewport = newIsMobileViewport;
 });
-
-
-
-function fadeInElements() {
-  var elements = document.getElementsByClassName("fade-in-element");
-  var delay = 150; // Delay between each element in milliseconds
-  for (var i = 0; i < elements.length; i++) {
-    (function(index) {
-      setTimeout(function() {
-        elements[index].classList.add("fade-in");
-      }, delay * index);
-    })(i);
-  }
-}
-
-function removeFadeInClass() {
-  var elements = document.getElementsByClassName("fade-in-element");
-  for (var i = 0; i < elements.length; i++) {
-    elements[i].classList.remove("fade-in");
-  }
-}
