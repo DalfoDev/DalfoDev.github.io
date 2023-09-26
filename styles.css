@@ -12,8 +12,11 @@ html {
 body {
   font-family: Arial, sans-serif;
   color: #FAF6F2;
+  background: rgb(19,18,21);
+  /*
   background: rgb(0, 80, 163);
   background: linear-gradient(180deg, #284B63 0%, #22181C 98%);
+  */
 }
 
 /* Cursor light */
@@ -90,7 +93,8 @@ body {
 
 /* Navigation bar */
 .navbar {
-  background-color: rgba(51, 51, 51);
+  background-color: rgb(37,36,40);
+  /*background-color: rgba(51, 51, 51);*/
   overflow: hidden;
   display: flex;
   justify-content: flex-end;
@@ -132,7 +136,7 @@ a:hover .cursor-light {
   border-radius: 50px;
   padding: 10px 20px;
   transition: all 0.3s ease;
-  background-color: rgba(51, 51, 51, 0.60);
+  background-color: rgb(37,36,40, 0.6);
   flex: 1;
 }
 
@@ -186,7 +190,7 @@ a:hover .cursor-light {
 }
 
 .about-me {
-  background: rgb(20, 18, 27);
+  background: rgb(17, 28, 49);
   padding-top: 20px;
   padding-bottom: 20px;
 }
@@ -462,4 +466,53 @@ content: url(img/leetcode-hover.png);
   height: 10vw;
   width: 10vw;
   }
+}
+
+.fadeInDown{
+  -webkit-animation: fadeInDown 1.2s both;
+  -moz-animation: fadeInDown 1.2s both;
+  -o-animation: fadeInDown 1.2s both;
+  animation: fadeInDown 1.2s both;
+}
+
+@-webkit-keyframes fadeInDown{
+  0%{
+    opacity: 0;
+    -webkit-animation-transform: translateY(-50px) ;
+  }
+  100%{
+   opacity: 1;
+   -webkit-animation-transform: translateY(0) ;
+  }
+}
+
+@-moz-keyframes fadeInDown{  0%{
+  opacity: 0;
+  -moz-animation-transform: translateY(-50px) ;
+}
+100%{
+ opacity: 1;
+ -moz-animation-transform: translateY(0) ;
+}}
+
+@-o-keyframes fadeInDown{  0%{
+  opacity: 0;
+  -o-animation-transform: translateY(-50px) ;
+}
+100%{
+ opacity: 1;
+ -o-transform: translateY(0) ;
+}}
+
+@keyframes fadeInDown{  0%{
+  opacity: 0;
+  transform: translateY(-50px) ;
+}
+100%{
+ opacity: 1;
+ transform: translateY(0) ;
+}}
+
+.blank{
+  display: block;
 }
