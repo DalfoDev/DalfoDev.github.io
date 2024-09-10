@@ -157,3 +157,21 @@ function initializeAnimation(targetSelector, outputContainerId) {
       });
     }
   });
+
+  document.addEventListener("DOMContentLoaded", function() {
+    // Select the checkbox that controls the hamburger menu
+    const menuCheckbox = document.querySelector(".menu-container input[type='checkbox']");
+    
+    // Select all the menu items
+    const menuItems = document.querySelectorAll(".menu-items a");
+
+    // Add a click event to each menu item
+    menuItems.forEach(item => {
+        item.addEventListener("click", function() {
+            // Uncheck the checkbox to close the menu
+            if (menuCheckbox.checked) {
+                menuCheckbox.checked = false;
+            }
+        });
+    });
+});

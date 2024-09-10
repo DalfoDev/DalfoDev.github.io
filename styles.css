@@ -5,6 +5,10 @@
 }
 */
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
     background-color: rgb(30,30,36);/*rgb(18, 18, 18);*/
     color: #faf6f2;
@@ -105,6 +109,8 @@ a{
 #cursor {
     animation: blink 1.25s infinite;
     color: rgb(255, 255, 255);
+    z-index: 1; /* Lower z-index to prevent it from appearing above the navbar */
+    position: relative; /* Make sure it doesn't interfere with the navbar */
 }
 
 .about-me {
@@ -323,4 +329,128 @@ content: url(img/git-hover.png);
 #mail:hover .mail{
   color: #0c06f7;
 }
+
+@media (max-width: 768px) {
+  .navbar, .pill, #navbar{
+    display: none;
+  }
+}
+
+/* Desktop mode (Hamburger menu hidden) */
+.menu {
+  display: none;
+
+}
+
+/* Mobile mode (Hamburger menu visible) */
+@media (max-width: 768px) {
+  .menu {
+    display: block;
+    position: fixed;
+    z-index: 1000;
+  }
+
+  .menu-container {
+    display: block;
+    position: relative;
+    height: 64px;
+  }
+
+  .menu-container input[type="checkbox"] {
+    position: absolute;
+    display: block;
+    height: 32px;
+    width: 30px;
+    top: 20px;
+    left: 20px;
+    z-index: 999;
+    opacity: 0;
+  }
+
+  .menu-container .hamburger-lines {
+    display: block;
+    height: 23px;
+    width: 35px;
+    position: absolute;
+    top: 17px;
+    left: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+
+  .menu-container .hamburger-lines .line {
+    display: block;
+    height: 4px;
+    width: 100%;
+    border-radius: 10px;
+    background: #dcdcdc;
+    z-index: 999;
+  }
+
+  li a{
+    color: #dcdcdc;
+  }
+
+  .menu-container .hamburger-lines .line1 {
+    transform-origin: 0% 0%;
+    transition: transform 0.4s ease-in-out;
+  }
+
+  .menu-container .hamburger-lines .line2 {
+    transition: transform 0.2s ease-in-out;
+  }
+
+  .menu-container .hamburger-lines .line3 {
+    transform-origin: 0% 100%;
+    transition: transform 0.4s ease-in-out;
+  }
+
+  ul {
+    list-style-type: none;
+  }
+
+  .menu .menu-items {
+    padding-top: 100px;
+    background: #18181f;
+    z-index: 9999;
+    height: 100vh;
+    max-width: 300px;
+    transform: translate(-150%);
+    display: flex;
+    flex-direction: column;
+    margin-left: -40px;
+    padding-left: 50px;
+    transition: transform 0.5s ease-in-out;
+    width: 300px;
+  }
+
+  a:link {
+    text-decoration: none;
+  }
+
+  .menu .menu-items li {
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+    
+  }
+
+  .menu-container input[type="checkbox"]:checked ~ .menu-items {
+    transform: translateX(0);
+  }
+
+  .menu-container input[type="checkbox"]:checked ~ .hamburger-lines .line1 {
+    transform: rotate(35deg);
+  }
+
+  .menu-container input[type="checkbox"]:checked ~ .hamburger-lines .line2 {
+    transform: scaleY(0);
+  }
+
+  .menu-container input[type="checkbox"]:checked ~ .hamburger-lines .line3 {
+    transform: rotate(-35deg);
+  }
+}
+
 
