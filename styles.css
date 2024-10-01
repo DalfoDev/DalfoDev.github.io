@@ -62,7 +62,7 @@ a{
   border-radius: 50px;
   padding: 10px 20px;
   transition: all 0.3s ease;
-  background-color: rgb(37,36,40, 0.6);
+  background-color: rgba(37, 36, 40, 0.75);
   flex: 1;
 
 }
