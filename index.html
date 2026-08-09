@@ -60,16 +60,18 @@
       </button>
     </div>
 
-    <dialog
+<dialog
       id="mobile-menu"
-      class="md:hidden fixed inset-0 z-40 h-full w-full bg-ink-950/98 backdrop-blur-sm flex-col items-start justify-center gap-2 px-10 opacity-0 pointer-events-none -translate-y-2 transition-all duration-300 m-0 max-w-none max-h-none border-none"
+      class="md:hidden fixed inset-0 z-40 h-full w-full bg-ink-950/98 backdrop-blur-sm opacity-0 pointer-events-none -translate-y-2 transition-all duration-300 m-0 max-w-none max-h-none border-none text-mist-100 p-0"
       aria-label="Mobile navigation"
     >
-      <a href="#home" data-nav-link class="mobile-nav-link text-3xl font-semibold text-mist-100 py-3">Home</a>
-      <a href="#about" data-nav-link class="mobile-nav-link text-3xl font-semibold text-mist-100 py-3">About</a>
-      <a href="#experience" data-nav-link class="mobile-nav-link text-3xl font-semibold text-mist-100 py-3">Experience</a>
-      <a href="#projects" data-nav-link class="mobile-nav-link text-3xl font-semibold text-mist-100 py-3">Projects</a>
-      <a href="#contact" data-nav-link class="mobile-nav-link text-3xl font-semibold text-mist-100 py-3">Contact</a>
+      <div class="flex h-full w-full flex-col items-start justify-center gap-2 px-10">
+        <a href="#home" data-nav-link class="mobile-nav-link text-3xl font-semibold text-mist-100 py-3">Home</a>
+        <a href="#about" data-nav-link class="mobile-nav-link text-3xl font-semibold text-mist-100 py-3">About</a>
+        <a href="#experience" data-nav-link class="mobile-nav-link text-3xl font-semibold text-mist-100 py-3">Experience</a>
+        <a href="#projects" data-nav-link class="mobile-nav-link text-3xl font-semibold text-mist-100 py-3">Projects</a>
+        <a href="#contact" data-nav-link class="mobile-nav-link text-3xl font-semibold text-mist-100 py-3">Contact</a>
+      </div>
     </dialog>
   </header>
 

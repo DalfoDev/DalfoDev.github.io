@@ -317,13 +317,10 @@ pre {
 
 /* ---------- Custom cursor (fine pointers only, e.g. desktop mice) ---------- */
 @media (pointer: fine) {
-  body {
-    cursor: none;
-  }
+  body,
   a,
   button,
-  [role="button"],
-  dialog {
+  [role="button"] {
     cursor: none;
   }
 
@@ -332,7 +329,7 @@ pre {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 9999;
+    z-index: 2147483647; /* Maximum z-index integer to render on top-layer modals */
     border-radius: 50%;
     pointer-events: none;
     will-change: transform;

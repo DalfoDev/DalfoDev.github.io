@@ -78,25 +78,43 @@ function initMobileMenu() {
   function openMenu() {
     toggle.setAttribute('aria-expanded', 'true');
     menu.classList.add('is-open');
+    menu.classList.remove('pointer-events-none');
     document.body.style.overflow = 'hidden';
-    menu.showModal(); // Automatically traps focus
+    
+    if (typeof menu.show === 'function' && !menu.open) {
+      menu.show(); 
+    }
   }
 
   function closeMenu() {
     toggle.setAttribute('aria-expanded', 'false');
     menu.classList.remove('is-open');
+    menu.classList.add('pointer-events-none');
     document.body.style.overflow = '';
-    menu.close();
+
+    setTimeout(() => {
+      if (!menu.classList.contains('is-open') && typeof menu.close === 'function' && menu.open) {
+        menu.close();
+      }
+    }, 300);
   }
 
-  toggle.addEventListener('click', () => {
-    const isOpen = toggle.getAttribute('aria-expanded') === 'true';
-    isOpen ? closeMenu() : openMenu();
+  toggle.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (menu.classList.contains('is-open')) {
+      closeMenu();
+    } else {
+      openMenu();
+    }
   });
 
   navLinks.forEach((link) => link.addEventListener('click', closeMenu));
-  
-  // The <dialog> handles Escape natively, but keeping custom logic if needed.
+
+  // Close when clicking empty space in overlay
+  menu.addEventListener('click', (e) => {
+    if (e.target === menu) closeMenu();
+  });
+
   document.addEventListener('keydown', (event) => {
     if (event.key === 'Escape') closeMenu();
   });
@@ -108,14 +126,16 @@ function initScrollReveal(prefersReducedMotion) {
   if (!revealEls.length) return;
 
   if (prefersReducedMotion) {
-    revealEls.forEach((el) => el.classList.add('is-visible'));
+    revealEls.forEach((el) => {
+      if (el instanceof Element) el.classList.add('is-visible');
+    });
     return;
   }
 
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry, i) => {
-        if (entry.isIntersecting) {
+        if (entry.isIntersecting && entry.target instanceof Element) {
           const el = entry.target;
           setTimeout(() => el.classList.add('is-visible'), i * 60);
           observer.unobserve(el);
@@ -125,7 +145,9 @@ function initScrollReveal(prefersReducedMotion) {
     { threshold: 0.15, rootMargin: '0px 0px -40px 0px' }
   );
 
-  revealEls.forEach((el) => observer.observe(el));
+  revealEls.forEach((el) => {
+    if (el instanceof Element) observer.observe(el);
+  });
 }
 
 /* ---------- Highlight active nav link while scrolling ---------- */
@@ -136,8 +158,8 @@ function initActiveNavLink() {
 
   const linkById = new Map();
   desktopLinks.forEach((link) => {
-    const id = link.getAttribute('href').slice(1);
-    linkById.set(id, link);
+    const id = link.getAttribute('href')?.slice(1);
+    if (id) linkById.set(id, link);
   });
 
   const observer = new IntersectionObserver(
@@ -154,7 +176,9 @@ function initActiveNavLink() {
     { threshold: 0.5 }
   );
 
-  sections.forEach((section) => observer.observe(section));
+  sections.forEach((section) => {
+    if (section instanceof Element) observer.observe(section);
+  });
 }
 
 /* =========================================================
@@ -263,7 +287,7 @@ function initCustomCursor() {
   function followLoop() {
     const dx = targetX - ringX;
     const dy = targetY - ringY;
-    
+
     // Stop the loop if the ring has practically caught up to the pointer
     if (Math.abs(dx) < 0.1 && Math.abs(dy) < 0.1) {
       ringX = targetX;
@@ -278,7 +302,7 @@ function initCustomCursor() {
     ring.style.transform = `translate(${ringX}px, ${ringY}px) translate(-50%, -50%)`;
     followRaf = requestAnimationFrame(followLoop);
   }
-  
+
   followLoop();
 
   const hoverTargets = document.querySelectorAll(
