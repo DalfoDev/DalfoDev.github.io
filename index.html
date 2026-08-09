@@ -124,8 +124,8 @@
         <p class="reveal font-mono text-base text-violet-400 mb-3">&lt;about/&gt;</p>
         <h2 class="reveal font-sans text-3xl md:text-4xl font-bold text-mist-100 mb-12">Who I am</h2>
 
-        <!-- Editor window -->
-        <div class="reveal overflow-hidden rounded-2xl border border-white/10 bg-ink-900 shadow-2xl shadow-black/40">
+        <!-- Editor window (desktop) -->
+        <div class="reveal hidden md:block overflow-hidden rounded-2xl border border-white/10 bg-ink-900 shadow-2xl shadow-black/40">
           <!-- Title bar -->
           <div class="flex items-center gap-2 border-b border-white/10 bg-ink-800 px-4 py-3">
             <span class="h-3 w-3 rounded-full bg-[#ff5f57]"></span>
@@ -148,6 +148,68 @@
               ><span class="code-line"><span class="ln">9</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="param">self</span>.stack = [<span class="str">"TypeScript"</span>, <span class="str">"Python"</span>, <span class="str">"Java"</span>, <span class="str">"Elixir"</span>, <span class="str">"React"</span>, <span class="str">"Next.js"</span>, <span class="str">"Phoenix LiveView"</span>]</span
               ><span class="code-line"><span class="ln">10</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="param">self</span>.tools = [<span class="str">"Docker"</span>, <span class="str">"Kubernetes"</span>, <span class="str">"Firebase"</span>, <span class="str">"PostgreSQL"</span>, <span class="str">"GitHub Actions"</span>]</span
             ></code></pre>
+          </div>
+        </div>
+
+        <!-- Boot-sequence terminal (mobile) -->
+        <div class="reveal md:hidden overflow-hidden rounded-2xl border border-white/10 bg-ink-900 shadow-2xl shadow-black/40" data-boot-terminal>
+          <!-- Title bar -->
+          <div class="flex items-center gap-2 border-b border-white/10 bg-ink-800 px-4 py-3">
+            <span class="h-3 w-3 rounded-full bg-[#ff5f57]"></span>
+            <span class="h-3 w-3 rounded-full bg-[#febc2e]"></span>
+            <span class="h-3 w-3 rounded-full bg-[#28c840]"></span>
+            <span class="ml-4 font-mono text-xs text-mist-500">dominic@portfolio: ~</span>
+          </div>
+
+          <div class="px-4 py-5 font-mono text-[13px] leading-6">
+            <p class="text-mist-700">[boot] initializing profile.sys&hellip; <span class="text-sky-400">OK</span></p>
+
+            <div class="mt-4" data-boot-step>
+              <p>
+                <span class="text-violet-400">$</span>
+                <span class="boot-cmd" data-cmd="whoami"></span><span class="blink-cursor text-violet-400" aria-hidden="true">▋</span>
+              </p>
+              <p class="boot-output mt-1 text-mist-100" data-boot-output>Dominic Alfonso</p>
+            </div>
+
+            <div class="mt-4" data-boot-step>
+              <p>
+                <span class="text-violet-400">$</span>
+                <span class="boot-cmd" data-cmd="cat role.txt"></span><span class="blink-cursor text-violet-400" aria-hidden="true">▋</span>
+              </p>
+              <p class="boot-output mt-1 text-mist-100" data-boot-output>Full Stack SWE Intern @ <span class="text-violet-400">True Anomaly</span></p>
+            </div>
+
+            <div class="mt-4" data-boot-step>
+              <p>
+                <span class="text-violet-400">$</span>
+                <span class="boot-cmd" data-cmd="cat education.txt"></span><span class="blink-cursor text-violet-400" aria-hidden="true">▋</span>
+              </p>
+              <p class="boot-output mt-1 text-mist-100" data-boot-output>
+                CSULB — B.S. Computer Science, ML<br>
+                <span class="text-mist-500">Class of 2027 &middot; 3.7 GPA</span>
+              </p>
+            </div>
+
+            <div class="mt-4" data-boot-step>
+              <p>
+                <span class="text-violet-400">$</span>
+                <span class="boot-cmd" data-cmd="cat focus.txt"></span><span class="blink-cursor text-violet-400" aria-hidden="true">▋</span>
+              </p>
+              <div class="boot-output mt-2 flex flex-wrap gap-2" data-boot-output>
+                <span class="tech-pill">full-stack systems</span>
+                <span class="tech-pill">machine learning</span>
+                <span class="tech-pill">robotics</span>
+              </div>
+            </div>
+
+            <div class="mt-5" data-boot-step data-boot-final>
+              <a href="#projects" class="boot-cta ripple-target">
+                <span class="text-violet-400">$</span>
+                <span class="boot-cmd text-mist-100" data-cmd="cd projects/"></span><span class="blink-cursor text-violet-400" aria-hidden="true">▋</span>
+                <svg viewBox="0 0 24 24" class="boot-cta-arrow" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H18v4.5M18 6l-7.5 7.5M11 6H8a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3"/></svg>
+              </a>
+            </div>
           </div>
         </div>
 

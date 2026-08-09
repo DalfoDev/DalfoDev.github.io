@@ -5,6 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   setFooterYear();
   initTypingEffect(prefersReducedMotion);
+  initBootSequence(prefersReducedMotion);
   initMobileMenu();
   initScrollReveal(prefersReducedMotion);
   initActiveNavLink();
@@ -120,6 +121,103 @@ function initTypingEffect(prefersReducedMotion) {
   }
 
   loop();
+}
+
+/* ---------- Boot-sequence terminal (mobile about section) ---------- */
+function initBootSequence(prefersReducedMotion) {
+  const terminal = document.querySelector('[data-boot-terminal]');
+  if (!terminal) return;
+
+  const steps = Array.from(terminal.querySelectorAll('[data-boot-step]'));
+  if (!steps.length) return;
+
+  // Reduced motion: show the finished state instantly, no typing/fades.
+  if (prefersReducedMotion) {
+    steps.forEach((step) => {
+      const cmdEl = step.querySelector('.boot-cmd');
+      if (cmdEl) cmdEl.textContent = cmdEl.dataset.cmd || '';
+
+      const outputEl = step.querySelector('[data-boot-output]');
+      if (outputEl) outputEl.classList.add('is-shown');
+
+      const cursorEl = step.querySelector('.blink-cursor');
+      if (cursorEl && step.hasAttribute('data-boot-final')) {
+        cursorEl.classList.add('is-active');
+      }
+    });
+    return;
+  }
+
+  const CMD_TYPE_SPEED = 32; // ms per character
+  const STEP_PAUSE = 260; // ms pause after a command finishes / output reveals
+  let started = false;
+
+  function typeCommand(cmdEl, cursorEl, onDone) {
+    const text = cmdEl.dataset.cmd || '';
+    let i = 0;
+
+    if (cursorEl) cursorEl.classList.add('is-active');
+
+    function tick() {
+      cmdEl.textContent = text.slice(0, i);
+      i += 1;
+
+      if (i <= text.length) {
+        setTimeout(tick, CMD_TYPE_SPEED);
+      } else {
+        setTimeout(onDone, STEP_PAUSE);
+      }
+    }
+
+    tick();
+  }
+
+  function runStep(index) {
+    if (index >= steps.length) return;
+
+    const step = steps[index];
+    const cmdEl = step.querySelector('.boot-cmd');
+    const cursorEl = step.querySelector('.blink-cursor');
+    const outputEl = step.querySelector('[data-boot-output]');
+    const isFinal = step.hasAttribute('data-boot-final');
+
+    if (!cmdEl) {
+      runStep(index + 1);
+      return;
+    }
+
+    typeCommand(cmdEl, cursorEl, () => {
+      if (outputEl) outputEl.classList.add('is-shown');
+
+      // Leave the cursor blinking on the final "cd projects/" line to
+      // signal it's the interactive close of the sequence.
+      if (cursorEl && !isFinal) {
+        cursorEl.classList.remove('is-active');
+      }
+
+      if (isFinal) {
+        const arrowEl = step.querySelector('.boot-cta-arrow');
+        if (arrowEl) arrowEl.classList.add('is-shown');
+      }
+
+      setTimeout(() => runStep(index + 1), STEP_PAUSE);
+    });
+  }
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting && !started) {
+          started = true;
+          runStep(0);
+          observer.disconnect();
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+
+  observer.observe(terminal);
 }
 
 /* ---------- Mobile hamburger menu ---------- */

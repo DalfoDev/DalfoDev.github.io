@@ -722,6 +722,9 @@
   .text-mist-700 {
     color: var(--color-mist-700);
   }
+  .text-sky-400 {
+    color: var(--color-sky-400);
+  }
   .text-transparent {
     color: transparent;
   }
@@ -928,6 +931,9 @@
     .md\:col-span-2 {
       grid-column: span 2 / span 2;
     }
+    .md\:block {
+      display: block;
+    }
     .md\:flex {
       display: flex;
     }
@@ -1118,6 +1124,54 @@ html {
 #mobile-menu .mobile-nav-link.is-active {
   color: var(--color-violet-400);
   transform: translateX(0.35rem);
+}
+.text-sky-400 {
+  color: var(--color-sky-400);
+}
+.blink-cursor {
+  opacity: 0;
+}
+.blink-cursor.is-active {
+  opacity: 1;
+  animation: blink 1.1s step-end infinite;
+}
+.boot-output {
+  padding-left: 1rem;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.boot-output.is-shown {
+  opacity: 1;
+}
+.boot-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-left: -0.25rem;
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+.boot-cta:hover, .boot-cta:focus-visible {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+.boot-cta-arrow {
+  height: 0.875rem;
+  width: 0.875rem;
+  color: var(--color-mist-700);
+  opacity: 0;
+  transition: color 0.2s ease, opacity 0.4s ease;
+}
+.boot-cta-arrow.is-shown {
+  opacity: 1;
+}
+.boot-cta:hover .boot-cta-arrow, .boot-cta:focus-visible .boot-cta-arrow {
+  color: var(--color-violet-400);
+}
+@media (prefers-reduced-motion: reduce) {
+  .blink-cursor {
+    animation: none !important;
+  }
 }
 pre {
   color: var(--color-mist-300);
