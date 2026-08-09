@@ -1,199 +1,438 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="styles.css">
-    <title>&lt;Dominic/&gt; Portfolio</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>&lt;Dominic/&gt; — Software Engineer</title>
+<meta name="description" content="Dominic Alfonso — Software Engineer portfolio. Projects in AI, web development, and robotics.">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Compiled Production CSS -->
+<link rel="stylesheet" href="output.css">
 </head>
-<body>
 
-  <div class="navbar" id="navbar">
-    <a href="#intro">Home</a>
-    <a href="#content">About</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-  </div>
+<body class="bg-ink-950 text-mist-100 font-sans antialiased selection:bg-violet-600/40 selection:text-white">
 
-  <nav class="menu">
-    <div class="menu-container container">
-      <input type="checkbox" name="" id="">
-      <div class="hamburger-lines">
-        <span class="line line1"></span>
-        <span class="line line2"></span>
-        <span class="line line3"></span>
+  <!-- Custom cursor -->
+  <div id="cursor-dot" aria-hidden="true"></div>
+  <div id="cursor-ring" aria-hidden="true"></div>
+
+  <!-- Ambient glow that trails the pointer or finger -->
+  <div id="pointer-glow" aria-hidden="true"></div>
+
+  <!-- Skip link -->
+  <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[999] focus:bg-violet-600 focus:text-white focus:px-4 focus:py-2 focus:rounded-lg">
+    Skip to main content
+  </a>
+
+  <!-- Background grid + noise -->
+  <div class="fixed inset-0 -z-10 bg-grid" aria-hidden="true"></div>
+  <div class="fixed inset-0 -z-10 bg-glow" aria-hidden="true"></div>
+
+  <!-- ============ NAV (desktop) ============ -->
+  <header>
+    <nav id="navbar" aria-label="Primary" class="hidden md:flex fixed top-5 left-1/2 -translate-x-1/2 z-50 items-center gap-1 rounded-full border border-white/10 bg-ink-900/70 backdrop-blur-md px-2 py-2 shadow-lg shadow-black/30 transition-all duration-300">
+      <a href="#home" data-nav-link class="nav-link px-4 py-2 rounded-full text-sm text-mist-300 hover:text-mist-100 hover:bg-white/5 transition-colors">Home</a>
+      <a href="#about" data-nav-link class="nav-link px-4 py-2 rounded-full text-sm text-mist-300 hover:text-mist-100 hover:bg-white/5 transition-colors">About</a>
+      <a href="#experience" data-nav-link class="nav-link px-4 py-2 rounded-full text-sm text-mist-300 hover:text-mist-100 hover:bg-white/5 transition-colors">Experience</a>
+      <a href="#projects" data-nav-link class="nav-link px-4 py-2 rounded-full text-sm text-mist-300 hover:text-mist-100 hover:bg-white/5 transition-colors">Projects</a>
+      <a href="#contact" data-nav-link class="nav-link px-4 py-2 rounded-full text-sm text-mist-300 hover:text-mist-100 hover:bg-white/5 transition-colors">Contact</a>
+    </nav>
+
+    <!-- ============ NAV (mobile) ============ -->
+    <div class="md:hidden fixed top-4 right-4 z-50">
+      <button
+        id="menu-toggle"
+        type="button"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+        aria-label="Toggle navigation menu"
+        class="ripple-target relative flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-ink-900/80 backdrop-blur-md shadow-lg"
+      >
+        <span class="sr-only">Menu</span>
+        <span class="hamburger-line" id="line1"></span>
+        <span class="hamburger-line" id="line2"></span>
+        <span class="hamburger-line" id="line3"></span>
+      </button>
+    </div>
+
+    <dialog
+      id="mobile-menu"
+      class="md:hidden fixed inset-0 z-40 h-full w-full bg-ink-950/98 backdrop-blur-sm flex-col items-start justify-center gap-2 px-10 opacity-0 pointer-events-none -translate-y-2 transition-all duration-300 m-0 max-w-none max-h-none border-none"
+      aria-label="Mobile navigation"
+    >
+      <a href="#home" data-nav-link class="mobile-nav-link text-3xl font-semibold text-mist-100 py-3">Home</a>
+      <a href="#about" data-nav-link class="mobile-nav-link text-3xl font-semibold text-mist-100 py-3">About</a>
+      <a href="#experience" data-nav-link class="mobile-nav-link text-3xl font-semibold text-mist-100 py-3">Experience</a>
+      <a href="#projects" data-nav-link class="mobile-nav-link text-3xl font-semibold text-mist-100 py-3">Projects</a>
+      <a href="#contact" data-nav-link class="mobile-nav-link text-3xl font-semibold text-mist-100 py-3">Contact</a>
+    </dialog>
+  </header>
+
+  <main id="main">
+    <!-- ============ HERO ============ -->
+    <section id="home" class="relative flex min-h-screen scroll-mt-24 flex-col items-center justify-center px-6 text-center">
+      <p class="reveal font-mono text-sm text-violet-400 tracking-widest mb-6">console.log("hello world")</p>
+
+      <h1 class="reveal font-mono text-base sm:text-lg md:text-xl text-mist-500 mb-4">
+        Hi, I'm <span class="text-mist-100 font-medium">Dominic Alfonso</span> — a
+      </h1>
+
+      <p class="reveal font-mono font-semibold leading-tight text-[clamp(2rem,9vw,5.5rem)]">
+        <span class="text-mist-500">&lt;</span><span id="occupation" class="bg-gradient-to-r from-violet-400 via-violet-500 to-sky-400 bg-clip-text text-transparent">Software_Engineer</span><span id="cursor" class="text-violet-400" aria-hidden="true">|</span><span class="text-mist-500">&gt;</span>
+      </p>
+
+      <p class="reveal mt-8 max-w-2xl text-mist-500 text-sm sm:text-base leading-7">
+        Full-stack software engineer building reliable systems across web, ML, and robotics.
+        Currently interning at <span class="text-mist-300">True Anomaly</span> and studying Computer Science with a Machine Learning emphasis at CSULB.
+      </p>
+
+      <div class="reveal mt-6 flex flex-wrap items-center justify-center gap-2 font-mono text-xs">
+        <span class="rounded-full border border-violet-400/20 bg-violet-400/5 px-3 py-1.5 text-violet-400">SWE Intern @ True Anomaly</span>
+        <span class="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-mist-500">B.S. CS · ML · May 2027</span>
+        <span class="rounded-full border border-white/10 bg-white/[0.03] px-3 py-1.5 text-mist-500">3.7 GPA</span>
       </div>
-      <ul class="menu-items">
-        <li> <a href="#intro">Home</a></li>
-        <li><a href="#content">About</a></li>
-        <li> <a href="#projects">Projects</a></li>
-        <li> <a href="#contact">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
-  
-    <div id = "intro"></div>
 
-    <div class="intro-container">
-        <h1 id="greetings">Hello, my name is Dominic Alfonso, a...</h1>
-        <p id="typing-text">&lt;<span id="occupation">Software_Engineer</span><span id="cursor">|</span>&gt;</p>
-    </div>
-
-    <div class="targetWordContainer" id="About">
-        <h2 class="animated-text">About&gt;</h2>
-        <div id="outputContainerAbout"></div>
-    </div>
-
-    <div class="about-me">
-      <div id="content">
-        <p><span class="_def">class</span> <span class="_class">Person</span>:</p>
-        <p>·· <span class="_object">def</span> <span class="_init">__init__</span>(<span class="_pera">self</span>):</p>
-        <p>···· <span class="_object">self</span>.name = <span class="_string">"Dominic Alfonso"</span></p>
-        <p>···· <span class="_object">self</span>.homeland = <span class="_string">"Philippines"</span></p>
-        <p>···· <span class="_object">self</span>.skills = <span class="_bracket">[<span class="_string">"HTML/CSS/JS", "Python", "DaVinci Resolve", "Sketchbook", "Google Workspace", "<span id="cursor">|</span>"</span>]</span></p>
-        <p>···· <span class="_object">self</span>.education = <span class="_bracket">[(<span class="_string">"Harbor Teacher Prep Academy", "High School Diploma"</span>), (<span class="_string">"Los Angeles Harbor College", "A.A. Liberal Arts and Sciences: Arts and Humanities"</span>), (<span class="_string">"California State University Long Beach", "<span id="cursor">|</span>"</span>])</span></p>
-        <p>···· <span class="_object">self</span>.goal = <span class="_string">"To foster innovation and technological advancement for the betterment of society."</span></p>
-        <p>···· <span class="_object">self</span>.values = <span class="_bracket">[<span class="_string">"respect", "trustworthiness", "accountability", "collaboration", "empathy"</span>]</span></p>
-        <p>···· <span class="_object">self</span>.hobbies = <span class="_bracket">[<span class="_string">"playing the piano", "playing basketball", "gaming", "watching anime"</span>]</span></p>
+      <div class="reveal mt-10 flex flex-wrap items-center justify-center gap-4">
+        <a href="#experience" class="magnetic ripple-target rounded-full bg-violet-600 hover:bg-violet-500 text-white text-sm font-medium px-6 py-3 transition-colors shadow-lg shadow-violet-900/40">
+          View experience
+        </a>
+        <a href="https://github.com/DalfoDev" target="_blank" rel="noopener noreferrer" class="magnetic ripple-target rounded-full border border-white/15 hover:border-white/30 hover:bg-white/5 text-mist-100 text-sm font-medium px-6 py-3 transition-colors">
+          GitHub
+        </a>
+        <a href="#contact" class="magnetic ripple-target rounded-full border border-white/15 hover:border-white/30 hover:bg-white/5 text-mist-100 text-sm font-medium px-6 py-3 transition-colors">
+          Get in touch
+        </a>
       </div>
-    </div>
 
-<div id = "projects">
-    <div class="targetWordContainer" id="Projects">
-        <h2 class="animated-text">Projects&gt;</h2>
-        <div id="outputContainerProjects"></div>
-    </div>
+      <a href="#about" aria-label="Scroll to about section" class="reveal absolute bottom-8 left-1/2 -translate-x-1/2 text-mist-700 hover:text-mist-300 transition-colors">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 animate-bounce-slow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m0 0-6-6m6 6 6-6" />
+        </svg>
+      </a>
+    </section>
 
-    <div class = "card-container">
-      <div class="card">
-        <div class="card-inner">
-          <div class="card-front">
-            <!-- Front of card -->
-            <img src="img/tictactoe_ai.png" alt="Front Image">
+    <!-- ============ ABOUT ============ -->
+    <section id="about" class="relative px-6 py-24 md:py-32 scroll-mt-24">
+      <div class="mx-auto max-w-6xl">
+        <p class="reveal font-mono text-sm text-violet-400 mb-3">&lt;about/&gt;</p>
+        <h2 class="reveal font-sans text-3xl md:text-4xl font-bold text-mist-100 mb-12">Who I am</h2>
+
+        <!-- Editor window -->
+        <div class="reveal overflow-hidden rounded-2xl border border-white/10 bg-ink-900 shadow-2xl shadow-black/40">
+          <!-- Title bar -->
+          <div class="flex items-center gap-2 border-b border-white/10 bg-ink-800 px-4 py-3">
+            <span class="h-3 w-3 rounded-full bg-[#ff5f57]"></span>
+            <span class="h-3 w-3 rounded-full bg-[#febc2e]"></span>
+            <span class="h-3 w-3 rounded-full bg-[#28c840]"></span>
+            <span class="ml-4 font-mono text-xs text-mist-500">about_me.py</span>
           </div>
-          <div class="card-back">
-            <!-- Back of card -->
-            <p>The program implements a Tic Tac Toe game with adjustable difficulty levels for AI opponents. The AI difficulties range from easy (random moves) to impossible (optimal moves using Minimax with alpha-beta pruning). Players take turns placing marks on the board, aiming to form a line of three marks horizontally, vertically, or diagonally to win the game.</p>
-            <div class="button-container">
-              <a href="https://github.com/dominicAlfonso/tictactoe.ai.git" target = "blank" class="button">&ltcode&gt</a>
-            </div>
 
+          <!-- Code body -->
+          <div class="overflow-x-auto">
+            <pre class="font-mono text-[13px] sm:text-sm leading-7 px-2 py-5 min-w-[760px]"><code
+              ><span class="code-line"><span class="ln">1</span><span class="kw">class</span> <span class="cls">SoftwareEngineer</span>:</span
+              ><span class="code-line"><span class="ln">2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">def</span> <span class="fn">__init__</span>(<span class="param">self</span>):</span
+              ><span class="code-line"><span class="ln">3</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="param">self</span>.name = <span class="str">"Dominic Alfonso"</span></span
+              ><span class="code-line"><span class="ln">4</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="param">self</span>.current = <span class="str">"Full Stack SWE Intern @ True Anomaly"</span></span
+              ><span class="code-line"><span class="ln">5</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="param">self</span>.education = <span class="str">"CSULB — B.S. Computer Science, Machine Learning"</span></span
+              ><span class="code-line"><span class="ln">6</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="param">self</span>.graduation = <span class="str">"May 2027"</span></span
+              ><span class="code-line"><span class="ln">7</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="param">self</span>.gpa = <span class="num">3.7</span></span
+              ><span class="code-line"><span class="ln">8</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="param">self</span>.focus = [<span class="str">"full-stack systems"</span>, <span class="str">"machine learning"</span>, <span class="str">"robotics"</span>]</span
+              ><span class="code-line"><span class="ln">9</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="param">self</span>.stack = [<span class="str">"TypeScript"</span>, <span class="str">"Python"</span>, <span class="str">"Java"</span>, <span class="str">"Elixir"</span>, <span class="str">"React"</span>, <span class="str">"Next.js"</span>, <span class="str">"Phoenix LiveView"</span>]</span
+              ><span class="code-line"><span class="ln">10</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="param">self</span>.tools = [<span class="str">"Docker"</span>, <span class="str">"Kubernetes"</span>, <span class="str">"Firebase"</span>, <span class="str">"PostgreSQL"</span>, <span class="str">"GitHub Actions"</span>]</span
+            ></code></pre>
+          </div>
+        </div>
+
+        <div class="reveal mt-8 rounded-2xl border border-white/10 bg-ink-900/60 p-6">
+          <div class="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+            <div>
+              <p class="font-mono text-xs uppercase tracking-[0.2em] text-violet-400">Core stack</p>
+              <p class="mt-2 max-w-2xl text-sm leading-6 text-mist-500">A focused snapshot of the technologies I use most across production web systems, ML projects, and infrastructure.</p>
+            </div>
+            <div class="flex flex-wrap gap-2 md:max-w-xl md:justify-end">
+              <span class="tech-pill">TypeScript</span><span class="tech-pill">Python</span><span class="tech-pill">Java</span><span class="tech-pill">Elixir</span>
+              <span class="tech-pill">React</span><span class="tech-pill">Next.js</span><span class="tech-pill">Phoenix LiveView</span><span class="tech-pill">Node.js</span>
+              <span class="tech-pill">Docker</span><span class="tech-pill">Kubernetes</span><span class="tech-pill">Firebase</span><span class="tech-pill">PostgreSQL</span>
+            </div>
           </div>
         </div>
       </div>
+    </section>
 
-      <div class="card">
-        <div class="card-inner">
-          <div class="card-front">
-            <img src="img/calculator_fin.png" alt="Front Image">
-          </div>
-          <div class="card-back">
-            <p>This user-friendly calculator app enables basic arithmetic operations, built with HTML, CSS, and JavaScript. HTML defines layout and structure, CSS enhances visual appeal, setting colors, fonts, and spacing, while JavaScript handles interactions, calculations, and display updates.</p>
-            <div class="button-container">
-              <a href="https://github.com/dominicAlfonso/calculator.git" target = "blank" class="button">&ltcode&gt</a>
+    <!-- ============ EXPERIENCE ============ -->
+    <section id="experience" class="relative px-6 py-24 md:py-32 scroll-mt-24">
+      <div class="mx-auto max-w-6xl">
+        <p class="reveal font-mono text-sm text-violet-400 mb-3">&lt;experience/&gt;</p>
+        <h2 class="reveal font-sans text-3xl md:text-4xl font-bold text-mist-100 mb-4">Where I've shipped</h2>
+        <p class="reveal max-w-2xl text-mist-500 mb-12">Production engineering experience across aerospace software, education technology, and real-time web platforms.</p>
+
+        <div class="space-y-5">
+          <article class="reveal rounded-2xl border border-violet-400/20 bg-ink-900 p-6 md:p-8 shadow-xl shadow-black/20">
+            <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+              <div>
+                <div class="flex flex-wrap items-center gap-2">
+                  <h3 class="text-xl font-semibold text-mist-100">True Anomaly</h3>
+                  <span class="rounded-full bg-violet-400/10 px-2.5 py-1 font-mono text-[10px] uppercase tracking-wider text-violet-400">Current</span>
+                </div>
+                <p class="mt-1 text-sm text-mist-300">Full Stack Software Engineer Intern · Elixir / Phoenix LiveView</p>
+              </div>
+              <p class="font-mono text-xs text-mist-500">Jun 2026 — Present</p>
             </div>
-          </div>
+            <ul class="mt-5 grid gap-3 text-sm leading-6 text-mist-500 md:grid-cols-2">
+              <li class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4"><span class="text-mist-300">90% smaller orphaned export-process footprint</span> by improving interruption handling and temp-directory cleanup.</li>
+              <li class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">Built secure <span class="text-mist-300">RBAC admin tooling</span> in Phoenix LiveView and strengthened concurrent GenServer workflows.</li>
+              <li class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4 md:col-span-2">Validated software-in-the-loop and hardware-in-the-loop workflows to catch defects earlier in spacecraft software development.</li>
+            </ul>
+          </article>
+
+          <article class="reveal rounded-2xl border border-white/10 bg-ink-900 p-6 md:p-8">
+            <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+              <div>
+                <h3 class="text-xl font-semibold text-mist-100">RazeMath</h3>
+                <p class="mt-1 text-sm text-mist-300">Software Engineering Intern · Next.js / TypeScript</p>
+              </div>
+              <p class="font-mono text-xs text-mist-500">Jan 2026 — Feb 2026</p>
+            </div>
+            <div class="mt-5 grid gap-3 text-sm leading-6 text-mist-500 md:grid-cols-2">
+              <p class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">Fixed 8 MathLive cursor/hydration defects, contributing to <span class="text-mist-300">35% fewer input-related errors</span>.</p>
+              <p class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">Shipped multi-part problem input plus 15 Playwright E2E tests, reducing regression escapes by <span class="text-mist-300">20%</span>.</p>
+            </div>
+          </article>
+
+          <article class="reveal rounded-2xl border border-white/10 bg-ink-900 p-6 md:p-8">
+            <div class="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+              <div>
+                <h3 class="text-xl font-semibold text-mist-100">Beach Theta Tau</h3>
+                <p class="mt-1 text-sm text-mist-300">Software Engineer · React / TypeScript / Firebase</p>
+              </div>
+              <p class="font-mono text-xs text-mist-500">Jul 2024 — Jan 2026</p>
+            </div>
+            <div class="mt-5 grid gap-3 text-sm leading-6 text-mist-500 md:grid-cols-2">
+              <p class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">Built and deployed a production platform with passwordless auth, RBAC, and real-time sync for <span class="text-mist-300">50+ users</span>.</p>
+              <p class="rounded-xl border border-white/[0.06] bg-white/[0.02] p-4">Designed real-time voting and batched data access that reduced per-event database operations by <span class="text-mist-300">~65%</span>.</p>
+            </div>
+          </article>
         </div>
       </div>
+    </section>
 
-      <div class="card">
-        <div class="card-inner">
-          <div class="card-front">
-            <img src="img/chess_fin.png" alt="Front Image">
-          </div>
-          <div class="card-back">
-            <p>This software offers an interactive chess game GUI, similar to chess.com. The Chessboard class renders the board and handles movement, while the Pieces class manages icons. It updates in real time, supporting promotion dialogs, castling, and FEN string display for game state representation.</p>
-            <div class="button-container">
-              <a href="https://github.com/DalfoDev/chess" target = "blank" class="button">&ltcode&gt</a>
+    <!-- ============ PROJECTS ============ -->
+    <section id="projects" class="relative px-6 py-24 md:py-32 scroll-mt-24">
+      <div class="mx-auto max-w-6xl">
+        <p class="reveal font-mono text-sm text-violet-400 mb-3">&lt;projects/&gt;</p>
+        <h2 class="reveal font-sans text-3xl md:text-4xl font-bold text-mist-100 mb-12">Things I've built</h2>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+          <!-- Robot Dog -->
+          <article class="reveal project-card ripple-target group" data-tilt>
+            <div class="aspect-video overflow-hidden rounded-t-2xl bg-ink-800 flex items-center justify-center">
+              <div class="w-full px-6 font-mono text-xs leading-6 text-mist-500 transition-transform duration-500 group-hover:scale-105">
+                <p><span class="kw">import</span> cv2</p>
+                <p><span class="kw">from</span> mediapipe <span class="kw">import</span> hands</p>
+                <p class="mt-2 text-violet-400">gesture → model → robot</p>
+              </div>
             </div>
-          </div>
+            <div class="flex flex-1 flex-col p-5">
+              <div class="flex items-center justify-between gap-3">
+                <h3 class="font-semibold text-mist-100">Robot Dog</h3>
+                <span class="font-mono text-[10px] uppercase tracking-wider text-violet-400">ML / CV</span>
+              </div>
+              <p class="mt-2 text-sm text-mist-500 flex-1">Real-time gesture recognition for robotic control using MediaPipe, TensorFlow Lite, and OpenCV — 10 gestures at 25–30 FPS with sub-80 ms latency on CPU-only edge hardware.</p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span class="tech-pill">Python</span>
+                <span class="tech-pill">OpenCV</span>
+                <span class="tech-pill">TensorFlow Lite</span>
+                <span class="tech-pill">MediaPipe</span>
+              </div>
+              <div class="mt-5">
+                <a href="https://github.com/DalfoDev/dog_ai" target="_blank" rel="noopener noreferrer" class="project-link">
+                  <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.04-.72.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.8 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.27 5.67.42.36.78 1.07.78 2.17 0 1.56-.02 2.82-.02 3.2 0 .31.21.67.8.56A10.97 10.97 0 0 0 23.5 12c0-6.27-5.23-11.5-11.5-11.5Z"/></svg>
+                  Code
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Tic Tac Toe AI -->
+          <article class="reveal project-card ripple-target group" data-tilt>
+            <div class="aspect-video overflow-hidden rounded-t-2xl bg-ink-800">
+              <img src="img/tictactoe_ai.png" width="1920" height="1080" alt="Tic Tac Toe AI game board screenshot" loading="lazy" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
+            </div>
+            <div class="flex flex-1 flex-col p-5">
+              <h3 class="font-semibold text-mist-100">Tic Tac Toe AI</h3>
+              <p class="mt-2 text-sm text-mist-500 flex-1">Tic Tac Toe with adjustable AI difficulty, from random moves up to an unbeatable Minimax opponent with alpha-beta pruning.</p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span class="tech-pill">Python</span>
+                <span class="tech-pill">Minimax</span>
+                <span class="tech-pill">AI</span>
+              </div>
+              <div class="mt-5">
+                <a href="https://github.com/DalfoDev/tictactoe.ai" target="_blank" rel="noopener noreferrer" class="project-link">
+                  <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.04-.72.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.8 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.27 5.67.42.36.78 1.07.78 2.17 0 1.56-.02 2.82-.02 3.2 0 .31.21.67.8.56A10.97 10.97 0 0 0 23.5 12c0-6.27-5.23-11.5-11.5-11.5Z"/></svg>
+                  Code
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Calculator -->
+          <article class="reveal project-card ripple-target group" data-tilt>
+            <div class="aspect-video overflow-hidden rounded-t-2xl bg-ink-800">
+              <img src="img/calculator_fin.png" width="1920" height="1080" alt="Calculator app screenshot" loading="lazy" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
+            </div>
+            <div class="flex flex-1 flex-col p-5">
+              <h3 class="font-semibold text-mist-100">Calculator</h3>
+              <p class="mt-2 text-sm text-mist-500 flex-1">A clean, responsive calculator app for everyday arithmetic — layout in HTML, styling in CSS, logic and display updates in JavaScript.</p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span class="tech-pill">HTML</span>
+                <span class="tech-pill">CSS</span>
+                <span class="tech-pill">JavaScript</span>
+              </div>
+              <div class="mt-5">
+                <a href="https://github.com/DalfoDev/calculator" target="_blank" rel="noopener noreferrer" class="project-link">
+                  <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.04-.72.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.8 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.27 5.67.42.36.78 1.07.78 2.17 0 1.56-.02 2.82-.02 3.2 0 .31.21.67.8.56A10.97 10.97 0 0 0 23.5 12c0-6.27-5.23-11.5-11.5-11.5Z"/></svg>
+                  Code
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Chess -->
+          <article class="reveal project-card ripple-target group" data-tilt>
+            <div class="aspect-video overflow-hidden rounded-t-2xl bg-ink-800">
+              <img src="img/chess_fin.png" width="1920" height="1080" alt="Chess game interface screenshot" loading="lazy" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
+            </div>
+            <div class="flex flex-1 flex-col p-5">
+              <h3 class="font-semibold text-mist-100">Chess</h3>
+              <p class="mt-2 text-sm text-mist-500 flex-1">An interactive chess GUI in the spirit of chess.com. Handles real-time movement, castling, promotion dialogs, and FEN string display.</p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span class="tech-pill">JavaScript</span>
+                <span class="tech-pill">OOP</span>
+                <span class="tech-pill">GUI</span>
+              </div>
+              <div class="mt-5">
+                <a href="https://github.com/DalfoDev/chess" target="_blank" rel="noopener noreferrer" class="project-link">
+                  <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.04-.72.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.8 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.27 5.67.42.36.78 1.07.78 2.17 0 1.56-.02 2.82-.02 3.2 0 .31.21.67.8.56A10.97 10.97 0 0 0 23.5 12c0-6.27-5.23-11.5-11.5-11.5Z"/></svg>
+                  Code
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Sandman -->
+          <article class="reveal project-card ripple-target group" data-tilt>
+            <div class="aspect-video overflow-hidden rounded-t-2xl bg-ink-800">
+              <img src="img/robot.png" width="1920" height="1080" alt="Sandman microplastics-sorting robot" loading="lazy" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
+            </div>
+            <div class="flex flex-1 flex-col p-5">
+              <h3 class="font-semibold text-mist-100">Sandman</h3>
+              <p class="mt-2 text-sm text-mist-500 flex-1">An Arduino-driven robotic system, remote-controlled to separate microplastics from sand using a fine mesh filter.</p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span class="tech-pill">Arduino</span>
+                <span class="tech-pill">C++</span>
+                <span class="tech-pill">Robotics</span>
+              </div>
+              <div class="mt-5">
+                <a href="https://github.com/DalfoDev/sandman" target="_blank" rel="noopener noreferrer" class="project-link">
+                  <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.04-.72.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.8 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.27 5.67.42.36.78 1.07.78 2.17 0 1.56-.02 2.82-.02 3.2 0 .31.21.67.8.56A10.97 10.97 0 0 0 23.5 12c0-6.27-5.23-11.5-11.5-11.5Z"/></svg>
+                  Code
+                </a>
+              </div>
+            </div>
+          </article>
+
+          <!-- Theta Tau -->
+          <article class="reveal project-card ripple-target group" data-tilt>
+            <div class="aspect-video overflow-hidden rounded-t-2xl bg-ink-800">
+              <img src="img/Logo.png" width="1920" height="1080" alt="Beach Theta Tau website logo" loading="lazy" class="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105">
+            </div>
+            <div class="flex flex-1 flex-col p-5">
+              <h3 class="font-semibold text-mist-100">Beach Theta Tau</h3>
+              <p class="mt-2 text-sm text-mist-500 flex-1">Designed and built the organization's website in React — responsive layout, member profiles, and cross-browser support.</p>
+              <div class="mt-4 flex flex-wrap gap-2">
+                <span class="tech-pill">React</span>
+                <span class="tech-pill">Responsive</span>
+              </div>
+              <div class="mt-5 flex items-center gap-4">
+                <a href="https://github.com/BeachThetaTau/Beach-Theta-Tau_Website/tree/main" target="_blank" rel="noopener noreferrer" class="project-link">
+                  <svg viewBox="0 0 24 24" class="h-4 w-4" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.04-.72.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.8 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.27 5.67.42.36.78 1.07.78 2.17 0 1.56-.02 2.82-.02 3.2 0 .31.21.67.8.56A10.97 10.97 0 0 0 23.5 12c0-6.27-5.23-11.5-11.5-11.5Z"/></svg>
+                  Code
+                </a>
+                <a href="https://www.beachthetatau.com" target="_blank" rel="noopener noreferrer" class="project-link">
+                  <svg viewBox="0 0 24 24" class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H18v4.5M18 6l-7.5 7.5M11 6H8a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3"/></svg>
+                  Live site
+                </a>
+              </div>
+            </div>
+          </article>
+
         </div>
       </div>
+    </section>
 
-      <div class="card">
-        <div class="card-inner">
-          <div class="card-front">
-            <img src="img/robot.png" alt="Front Image">
-          </div>
-          <div class="card-back">
-            <p>The project showcases a seamlessly integrated robotic system where Arduino microcontrollers are employed to interpret signals from a remote controller, facilitating the execution of corresponding actions on the robot. This robot is used to separate the microplastics in sand through the use of fine mesh.</p>
-            <div class="button-container">
-              <a href="https://github.com/dominicAlfonso/sandman/tree/main" target = "blank" class="button">&ltcode&gt</a>
-            </div>
-          </div>
+    <!-- ============ CONTACT ============ -->
+    <section id="contact" class="relative px-6 py-24 md:py-32 scroll-mt-24">
+      <div class="mx-auto max-w-6xl">
+        <p class="reveal font-mono text-sm text-violet-400 mb-3">&lt;contact/&gt;</p>
+        <h2 class="reveal font-sans text-3xl md:text-4xl font-bold text-mist-100 mb-4">Want to build something together?</h2>
+        <p class="reveal text-mist-500 mb-12">I'm always open to new projects, ideas, or just talking shop. Reach me here:</p>
+
+        <div class="reveal grid grid-cols-1 sm:grid-cols-2 gap-4 text-left">
+          <a href="https://www.linkedin.com/in/dominic-alfonso" target="_blank" rel="noopener noreferrer" class="contact-card ripple-target" data-tilt>
+            <span class="contact-icon">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true"><path d="M20.45 20.45h-3.55v-5.57c0-1.33-.02-3.03-1.85-3.03-1.86 0-2.15 1.45-2.15 2.94v5.66H9.35V9h3.41v1.56h.05c.47-.9 1.63-1.85 3.36-1.85 3.59 0 4.25 2.37 4.25 5.44v6.3ZM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12ZM7.12 20.45H3.56V9h3.56v11.45Z"/></svg>
+            </span>
+            <span>
+              <span class="block text-sm font-medium text-mist-100">LinkedIn</span>
+              <span class="block text-xs text-mist-500">in/dominic-alfonso</span>
+            </span>
+          </a>
+
+          <a href="https://github.com/DalfoDev" target="_blank" rel="noopener noreferrer" class="contact-card ripple-target" data-tilt>
+            <span class="contact-icon">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.73.5.5 5.73.5 12c0 5.08 3.29 9.39 7.86 10.91.58.1.79-.25.79-.56 0-.27-.01-1.17-.02-2.12-3.2.7-3.88-1.36-3.88-1.36-.52-1.34-1.28-1.7-1.28-1.7-1.04-.72.08-.7.08-.7 1.15.08 1.76 1.19 1.76 1.19 1.03 1.76 2.7 1.25 3.36.96.1-.75.4-1.25.73-1.54-2.55-.29-5.24-1.28-5.24-5.68 0-1.26.45-2.29 1.19-3.09-.12-.29-.52-1.46.11-3.05 0 0 .97-.31 3.18 1.18a11 11 0 0 1 5.79 0c2.2-1.49 3.17-1.18 3.17-1.18.64 1.59.24 2.76.12 3.05.74.8 1.19 1.83 1.19 3.09 0 4.41-2.7 5.38-5.27 5.67.42.36.78 1.07.78 2.17 0 1.56-.02 2.82-.02 3.2 0 .31.21.67.8.56A10.97 10.97 0 0 0 23.5 12c0-6.27-5.23-11.5-11.5-11.5Z"/></svg>
+            </span>
+            <span>
+              <span class="block text-sm font-medium text-mist-100">GitHub</span>
+              <span class="block text-xs text-mist-500">github.com/DalfoDev</span>
+            </span>
+          </a>
+
+          <a href="https://leetcode.com/Dominic-Alfonso/" target="_blank" rel="noopener noreferrer" class="contact-card ripple-target" data-tilt>
+            <span class="contact-icon">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="m9 8-4 4 4 4m6-8 4 4-4 4M13 5l-2 14"/></svg>
+            </span>
+            <span>
+              <span class="block text-sm font-medium text-mist-100">LeetCode</span>
+              <span class="block text-xs text-mist-500">leetcode.com/Dominic-Alfonso</span>
+            </span>
+          </a>
+
+          <a href="mailto:dom.alfo@outlook.com" class="contact-card ripple-target" data-tilt>
+            <span class="contact-icon">
+              <svg viewBox="0 0 24 24" class="h-5 w-5" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3 6.75A1.75 1.75 0 0 1 4.75 5h14.5A1.75 1.75 0 0 1 21 6.75v10.5A1.75 1.75 0 0 1 19.25 19H4.75A1.75 1.75 0 0 1 3 17.25V6.75Z"/><path stroke-linecap="round" stroke-linejoin="round" d="m4 7 8 6 8-6"/></svg>
+            </span>
+            <span>
+              <span class="block text-sm font-medium text-mist-100">Email</span>
+              <span class="block text-xs text-mist-500">dom.alfo@outlook.com</span>
+            </span>
+          </a>
         </div>
       </div>
+    </section>
+  </main>
 
-      <div class="card">
-        <div class="card-inner">
-          <div class="card-front">
-            <img src="img/Logo.png" alt="Front Image">
-          </div>
-          <div class="card-back">
-            <p>Developed and designed the website <a href="https://www.beachthetatau.com" target="_blank" style="color: #82b6f0;">beachthetatau.com</a> for Theta Tau to advertise their organization. Creaetd the website layout and user interface with ReactJS, ensuring mobile responsiveness and cross-browser compatibility, and integrating features such as member profiles. </p>
-            <div class="button-container">
-              <a href="https://github.com/BeachThetaTau/Beach-Theta-Tau_Website/tree/main" target = "blank" class="button">&ltcode&gt</a>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+  <footer class="px-6 pb-10 pt-4 text-center">
+    <p class="font-mono text-xs text-mist-700">&copy; <span id="year"></span> Dominic Alfonso — built with HTML, Tailwind CSS &amp; vanilla JS.</p>
+  </footer>
 
-
-  
-  <div id = "contact">
-    <div class="targetWordContainer" id="Contacts">
-      <h2 class="animated-text">Contacts&gt;</h2>
-      <div id="outputContainerContacts"></div>
-  </div>
-
-
-
-  <div id = centered-contacts>
-
-    <span class = "info" id = "linkedIn">
-    <a href="https://www.linkedin.com/in/dominic-alfonso" target="_blank">
-      <div class =icon-container>
-        <img class = icon src="img/in.png" alt="linkedIn">
-        <p class = "linkedIn">in/dominic-alfonso</p>
-      </div>
-    </a>
-  </span>
-
-  <span class = "info" id = "git">
-    <a href="https://github.com/dominicAlfonso" target="_blank">
-      <div class =icon-container>
-        <img class = icon src="img/git.png" alt="gitHub">
-        <p class = "git">github.com/dominicAlfonso</p>
-      </div>
-    </a>
-  </span>
-
-  <span class = "info" id = "leetcode">
-    <a href="https://leetcode.com/Dominic-Alfonso/" target="_blank">
-      <div class =icon-container>
-        <img class = icon src="img/leetcode.png" alt="leetcode">
-        <p class = "leetcode">leetcode.com/Dominic-Alfonso/</p>
-      </div>
-    </a>
-  </span>
-
-  <span class = "info" id = "mail">
-    <a href="mailto:dominic21205@gmail.com" target="_blank">
-      <div class =icon-container>
-        <img class = icon src="img/mail.png" alt="mail">
-        <p class = "mail">Dominic21205@gmail.com</p>
-      </div>
-    </a>
-  </span>
-
-
-
-  </div>
-
-
-  </div>
-    <script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
