@@ -201,10 +201,39 @@ html {
   }
 }
 
+#mobile-menu {
+  height: 100vh;
+  min-height: 100vh;
+  width: 100vw;
+  max-width: none;
+  max-height: none;
+}
+
+/* Dynamic viewport height avoids the mobile browser address-bar gap. */
+@supports (height: 100dvh) {
+  #mobile-menu {
+    height: 100dvh;
+    min-height: 100dvh;
+  }
+}
+
 #mobile-menu.is-open {
   opacity: 1;
   pointer-events: auto;
   transform: translateY(0);
+}
+
+/* Keep the mobile active state in sync with the section on screen. */
+#mobile-menu .mobile-nav-link {
+  color: var(--color-mist-300);
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+#mobile-menu .mobile-nav-link.is-active {
+  color: var(--color-violet-400);
+  transform: translateX(0.35rem);
 }
 
 /* ---------- Terminal / code block syntax colors ---------- */

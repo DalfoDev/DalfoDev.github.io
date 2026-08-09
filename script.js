@@ -1,9 +1,3 @@
-/* =========================================================
-   Dominic Alfonso — Portfolio
-   Vanilla JS: typing effect, mobile menu, scroll reveal,
-   active nav highlighting. No dependencies.
-   ========================================================= */
-
 document.addEventListener('DOMContentLoaded', () => {
   const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
@@ -107,8 +101,12 @@ function initMobileMenu() {
     document.body.style.overflow = 'hidden';
     
     if (typeof menu.show === 'function' && !menu.open) {
-      menu.show(); 
+      menu.show();
     }
+
+    // A <dialog> focuses its first focusable child by default. Move focus to
+    // the dialog itself so "Home" is not visually highlighted every time.
+    menu.focus({ preventScroll: true });
   }
 
   function closeMenu() {
@@ -178,23 +176,35 @@ function initScrollReveal(prefersReducedMotion) {
 /* ---------- Highlight active nav link while scrolling ---------- */
 function initActiveNavLink() {
   const sections = document.querySelectorAll('main section[id]');
-  const desktopLinks = document.querySelectorAll('#navbar [data-nav-link]');
-  if (!sections.length || !desktopLinks.length) return;
+  const navLinks = document.querySelectorAll('[data-nav-link]');
+  if (!sections.length || !navLinks.length) return;
 
-  const linkById = new Map();
-  desktopLinks.forEach((link) => {
+  const linksById = new Map();
+  navLinks.forEach((link) => {
     const id = link.getAttribute('href')?.slice(1);
-    if (id) linkById.set(id, link);
+    if (!id) return;
+    if (!linksById.has(id)) linksById.set(id, []);
+    linksById.get(id).push(link);
   });
+
+  const setActiveSection = (id) => {
+    navLinks.forEach((link) => {
+      const isActive = link.getAttribute('href') === `#${id}`;
+      link.classList.toggle('is-active', isActive);
+
+      if (isActive) {
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.removeAttribute('aria-current');
+      }
+    });
+  };
 
   const observer = new IntersectionObserver(
     (entries) => {
       entries.forEach((entry) => {
-        const link = linkById.get(entry.target.id);
-        if (!link) return;
-        if (entry.isIntersecting) {
-          desktopLinks.forEach((l) => l.classList.remove('is-active'));
-          link.classList.add('is-active');
+        if (entry.isIntersecting && linksById.has(entry.target.id)) {
+          setActiveSection(entry.target.id);
         }
       });
     },
@@ -204,6 +214,14 @@ function initActiveNavLink() {
   sections.forEach((section) => {
     if (section instanceof Element) observer.observe(section);
   });
+
+  // Set the correct state immediately on initial load / refresh.
+  const initialSection = [...sections].find((section) => {
+    const rect = section.getBoundingClientRect();
+    const probe = window.innerHeight * 0.4;
+    return rect.top <= probe && rect.bottom > probe;
+  });
+  if (initialSection) setActiveSection(initialSection.id);
 }
 
 /* =========================================================
