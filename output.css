@@ -230,9 +230,6 @@
   .relative {
     position: relative;
   }
-  .static {
-    position: static;
-  }
   .inset-0 {
     inset: 0px;
   }
@@ -460,9 +457,6 @@
     --tw-border-style: none;
     border-style: none;
   }
-  .border-transparent {
-    border-color: transparent;
-  }
   .border-violet-400\/20 {
     border-color: color-mix(in srgb, #b79cf9 20%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -508,12 +502,6 @@
       background-color: color-mix(in oklab, var(--color-ink-900) 60%, transparent);
     }
   }
-  .bg-ink-900\/70 {
-    background-color: color-mix(in srgb, #0e0e15 70%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      background-color: color-mix(in oklab, var(--color-ink-900) 70%, transparent);
-    }
-  }
   .bg-ink-900\/80 {
     background-color: color-mix(in srgb, #0e0e15 80%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
@@ -528,9 +516,6 @@
     @supports (color: color-mix(in lab, red, red)) {
       background-color: color-mix(in oklab, var(--color-ink-950) 98%, transparent);
     }
-  }
-  .bg-transparent {
-    background-color: transparent;
   }
   .bg-violet-400\/5 {
     background-color: color-mix(in srgb, #b79cf9 5%, transparent);
@@ -627,8 +612,8 @@
   .py-5 {
     padding-block: calc(var(--spacing) * 5);
   }
-  .py-24 {
-    padding-block: calc(var(--spacing) * 24);
+  .py-12 {
+    padding-block: calc(var(--spacing) * 12);
   }
   .pt-4 {
     padding-top: calc(var(--spacing) * 4);
@@ -764,12 +749,6 @@
     --tw-shadow-color: color-mix(in srgb, #000 20%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
       --tw-shadow-color: color-mix(in oklab, color-mix(in oklab, var(--color-black) 20%, transparent) var(--tw-shadow-alpha), transparent);
-    }
-  }
-  .shadow-black\/30 {
-    --tw-shadow-color: color-mix(in srgb, #000 30%, transparent);
-    @supports (color: color-mix(in lab, red, red)) {
-      --tw-shadow-color: color-mix(in oklab, color-mix(in oklab, var(--color-black) 30%, transparent) var(--tw-shadow-alpha), transparent);
     }
   }
   .shadow-black\/40 {
@@ -964,8 +943,8 @@
     .md\:p-8 {
       padding: calc(var(--spacing) * 8);
     }
-    .md\:py-32 {
-      padding-block: calc(var(--spacing) * 32);
+    .md\:py-16 {
+      padding-block: calc(var(--spacing) * 16);
     }
     .md\:text-4xl {
       font-size: var(--text-4xl);
@@ -1049,7 +1028,24 @@ html {
 .animate-bounce-slow {
   animation: bounce-slow 2.2s ease-in-out infinite;
 }
-#navbar.is-on .nav-link.is-active {
+#navbar {
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+#navbar.is-scrolled {
+  background-color: color-mix(in srgb, #0e0e15 70%, transparent);
+  @supports (color: color-mix(in lab, red, red)) {
+    background-color: color-mix(in srgb, var(--color-ink-900) 70%, transparent);
+  }
+  backdrop-filter: blur(var(--blur-md));
+  -webkit-backdrop-filter: blur(var(--blur-md));
+  border-color: color-mix(in srgb, #fff 10%, transparent);
+  @supports (color: color-mix(in lab, red, red)) {
+    border-color: color-mix(in srgb, var(--color-white) 10%, transparent);
+  }
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+#navbar.is-scrolled .nav-link.is-active {
   color: var(--color-mist-100);
   background-color: rgba(255, 255, 255, 0.08);
 }

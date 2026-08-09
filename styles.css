@@ -1,8 +1,5 @@
 @import "tailwindcss";
 
-/* =========================================================
-   Theme & Color Variables (Tailwind v4)
-   ========================================================= */
 @theme {
   --color-ink-950: #0a0a0f;
   --color-ink-900: #0e0e15;
@@ -26,9 +23,6 @@
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
 }
 
-/* =========================================================
-   Base Layout & Motion Accessibility
-   ========================================================= */
 html {
   scroll-behavior: smooth;
 }
@@ -47,7 +41,6 @@ html {
   }
 }
 
-/* ---------- Background: subtle grid + radial glow ---------- */
 .bg-grid {
   background-image:
     linear-gradient(to right, rgba(255, 255, 255, 0.035) 1px, transparent 1px),
@@ -74,17 +67,13 @@ html {
     );
 }
 
-/* ---------- Hero responsive occupation ---------- */
 .hero-occupation {
-  /* Keep the job title as the visual focal point without letting the long
-     monospace string spill past narrow phone screens. */
   width: 100%;
   max-width: 100%;
   white-space: nowrap;
   font-size: clamp(1.25rem, 7vw, 5.5rem);
 }
 
-/* ---------- Hero cursor ---------- */
 #cursor {
   display: inline-block;
   animation: blink 1.1s step-end infinite;
@@ -101,7 +90,6 @@ html {
   }
 }
 
-/* ---------- Scroll-triggered reveal ---------- */
 .reveal {
   opacity: 0;
   transform: translateY(16px);
@@ -123,7 +111,6 @@ html {
   }
 }
 
-/* ---------- Slow bounce for scroll-down cue ---------- */
 @keyframes bounce-slow {
   0%,
   100% {
@@ -133,17 +120,32 @@ html {
     transform: translateY(6px);
   }
 }
+
 .animate-bounce-slow {
   animation: bounce-slow 2.2s ease-in-out infinite;
 }
 
-/* ---------- Nav active link (Only active when navbar has 'is-on' scrolled state) ---------- */
-#navbar.is-on .nav-link.is-active {
+/* Base navigation styles before scrolling */
+#navbar {
+  background-color: transparent;
+  border: 1px solid transparent;
+}
+
+#navbar.is-scrolled {
+  background-color: color-mix(in srgb, var(--color-ink-900) 70%, transparent);
+  backdrop-filter: blur(var(--blur-md));
+  -webkit-backdrop-filter: blur(var(--blur-md));
+  border-color: color-mix(in srgb, var(--color-white) 10%, transparent);
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.1),
+    0 4px 6px -4px rgba(0, 0, 0, 0.1);
+}
+
+#navbar.is-scrolled .nav-link.is-active {
   color: var(--color-mist-100);
   background-color: rgba(255, 255, 255, 0.08);
 }
 
-/* ---------- Mobile hamburger icon: Menu Button 1 ---------- */
 #menu-toggle .menu-icon,
 #menu-toggle .menu-icon::before,
 #menu-toggle .menu-icon::after {
@@ -219,7 +221,6 @@ html {
   max-height: none;
 }
 
-/* Dynamic viewport height avoids the mobile browser address-bar gap. */
 @supports (height: 100dvh) {
   #mobile-menu {
     height: 100dvh;
@@ -233,7 +234,6 @@ html {
   transform: translateY(0);
 }
 
-/* Keep the mobile active state in sync with the section on screen. */
 #mobile-menu .mobile-nav-link {
   color: var(--color-mist-300);
   transition:
@@ -250,10 +250,10 @@ html {
   color: var(--color-sky-400);
 }
 
-/* ---------- Boot-sequence terminal (mobile about section) ---------- */
 .blink-cursor {
   opacity: 0;
 }
+
 .blink-cursor.is-active {
   opacity: 1;
   animation: blink 1.1s step-end infinite;
@@ -264,6 +264,7 @@ html {
   opacity: 0;
   transition: opacity 0.4s ease;
 }
+
 .boot-output.is-shown {
   opacity: 1;
 }
@@ -277,10 +278,12 @@ html {
   border-radius: 0.5rem;
   transition: background-color 0.2s ease;
 }
+
 .boot-cta:hover,
 .boot-cta:focus-visible {
   background-color: rgba(255, 255, 255, 0.05);
 }
+
 .boot-cta-arrow {
   height: 0.875rem;
   width: 0.875rem;
@@ -290,9 +293,11 @@ html {
     color 0.2s ease,
     opacity 0.4s ease;
 }
+
 .boot-cta-arrow.is-shown {
   opacity: 1;
 }
+
 .boot-cta:hover .boot-cta-arrow,
 .boot-cta:focus-visible .boot-cta-arrow {
   color: var(--color-violet-400);
@@ -304,10 +309,10 @@ html {
   }
 }
 
-/* ---------- Terminal / code block syntax colors ---------- */
 pre {
   color: var(--color-mist-300);
 }
+
 .ln {
   display: inline-block;
   width: 1.75rem;
@@ -316,33 +321,40 @@ pre {
   color: #3f3d4e;
   user-select: none;
 }
+
 .code-line {
   display: block;
   padding: 0 1.25rem;
 }
+
 .code-line:hover {
   background: rgba(255, 255, 255, 0.03);
 }
+
 .kw {
   color: #f97583;
 }
+
 .cls {
   color: #7ee7c7;
 }
+
 .fn {
   color: #dcdcaf;
 }
+
 .param {
   color: #a7d9f7;
 }
+
 .str {
   color: #a5e07f;
 }
+
 .num {
   color: #ffab70;
 }
 
-/* ---------- Reusable component classes ---------- */
 .project-card {
   display: flex;
   flex-direction: column;
@@ -355,6 +367,7 @@ pre {
     border-color 0.35s ease,
     box-shadow 0.35s ease;
 }
+
 .project-card:hover {
   transform: translateY(-4px);
   border-color: rgba(161, 126, 240, 0.4);
@@ -384,6 +397,7 @@ pre {
   color: var(--color-violet-400);
   transition: color 0.2s ease;
 }
+
 .project-link:hover {
   color: var(--color-mist-100);
 }
@@ -401,11 +415,13 @@ pre {
     border-color 0.25s ease,
     background-color 0.25s ease;
 }
+
 .contact-card:hover {
   transform: translateY(-2px);
   border-color: rgba(161, 126, 240, 0.45);
   background-color: #191924;
 }
+
 .contact-icon {
   display: flex;
   align-items: center;
@@ -418,11 +434,6 @@ pre {
   color: var(--color-violet-400);
 }
 
-/* =========================================================
-   Pointer interactions
-   ========================================================= */
-
-/* ---------- Ambient glow that trails the pointer/finger ---------- */
 #pointer-glow {
   position: fixed;
   inset: 0;
@@ -436,16 +447,17 @@ pre {
   );
   transition: opacity 0.5s ease;
 }
+
 #pointer-glow.is-active {
   opacity: 1;
 }
+
 @media (prefers-reduced-motion: reduce) {
   #pointer-glow {
     display: none;
   }
 }
 
-/* ---------- Custom cursor (fine pointers only, e.g. desktop mice) ---------- */
 @media (pointer: fine) {
   body,
   a,
@@ -459,7 +471,7 @@ pre {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 2147483647; /* Maximum z-index integer to render on top-layer modals */
+    z-index: 2147483647;
     border-radius: 50%;
     pointer-events: none;
     will-change: transform;
@@ -510,12 +522,10 @@ pre {
   }
 }
 
-/* ---------- Magnetic buttons (desktop) ---------- */
 .magnetic {
   transition: transform 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
-/* ---------- Card tilt (desktop) ---------- */
 [data-tilt] {
   transition:
     transform 0.35s ease,
@@ -524,11 +534,11 @@ pre {
   transform-style: preserve-3d;
 }
 
-/* ---------- Ripple feedback (mouse + touch) ---------- */
 .ripple-target {
   position: relative;
   overflow: hidden;
 }
+
 .ripple {
   position: absolute;
   border-radius: 50%;
@@ -537,19 +547,20 @@ pre {
   animation: ripple-anim 0.6s ease-out forwards;
   pointer-events: none;
 }
+
 @keyframes ripple-anim {
   to {
     transform: scale(1);
     opacity: 0;
   }
 }
+
 @media (prefers-reduced-motion: reduce) {
   .ripple {
     display: none;
   }
 }
 
-/* ---------- Focus states (accessibility) ---------- */
 a:focus-visible,
 button:focus-visible {
   outline: 2px solid var(--color-violet-500);
