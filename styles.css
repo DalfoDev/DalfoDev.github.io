@@ -74,6 +74,16 @@ html {
     );
 }
 
+/* ---------- Hero responsive occupation ---------- */
+.hero-occupation {
+  /* Keep the job title as the visual focal point without letting the long
+     monospace string spill past narrow phone screens. */
+  width: 100%;
+  max-width: 100%;
+  white-space: nowrap;
+  font-size: clamp(1.25rem, 7vw, 5.5rem);
+}
+
 /* ---------- Hero cursor ---------- */
 #cursor {
   display: inline-block;

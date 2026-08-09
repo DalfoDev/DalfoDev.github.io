@@ -674,9 +674,6 @@
   .text-\[13px\] {
     font-size: 13px;
   }
-  .text-\[clamp\(2rem\,9vw\,5\.5rem\)\] {
-    font-size: clamp(2rem, 9vw, 5.5rem);
-  }
   .leading-6 {
     --tw-leading: calc(var(--spacing) * 6);
     line-height: calc(var(--spacing) * 6);
@@ -911,6 +908,9 @@
     .sm\:grid-cols-2 {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }
+    .sm\:px-6 {
+      padding-inline: calc(var(--spacing) * 6);
+    }
     .sm\:text-base {
       font-size: var(--text-base);
       line-height: var(--tw-leading, var(--text-base--line-height));
@@ -997,6 +997,12 @@ html {
 }
 .bg-glow {
   background: radial-gradient( 600px circle at 50% 0%, rgba(161, 126, 240, 0.18), transparent 60% ), radial-gradient( 500px circle at 85% 30%, rgba(125, 211, 252, 0.08), transparent 60% );
+}
+.hero-occupation {
+  width: 100%;
+  max-width: 100%;
+  white-space: nowrap;
+  font-size: clamp(1.25rem, 7vw, 5.5rem);
 }
 #cursor {
   display: inline-block;
