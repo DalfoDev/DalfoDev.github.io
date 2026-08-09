@@ -13,12 +13,37 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal(prefersReducedMotion);
   initActiveNavLink();
   initPointerInteractions(prefersReducedMotion);
+  initNavbarScroll();
 });
 
 /* ---------- Footer year ---------- */
 function setFooterYear() {
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
+}
+
+/* ---------- Navbar Scroll Transition ---------- */
+function initNavbarScroll() {
+  const navbar = document.getElementById('navbar');
+  if (!navbar) return;
+
+  const handleScroll = () => {
+    // Check if the user has scrolled down more than 20 pixels
+    if (window.scrollY > 20) {
+      navbar.classList.add('bg-ink-900/70', 'backdrop-blur-md', 'border-white/10', 'shadow-lg', 'shadow-black/30', 'is-on');
+      navbar.classList.remove('border-transparent', 'bg-transparent');
+    } else {
+      // Revert to transparent state and remove 'is-on' when at the top
+      navbar.classList.remove('bg-ink-900/70', 'backdrop-blur-md', 'border-white/10', 'shadow-lg', 'shadow-black/30', 'is-on');
+      navbar.classList.add('border-transparent', 'bg-transparent');
+    }
+  };
+
+  // Run once immediately to set the correct state on load or refresh
+  handleScroll();
+  
+  // Listen to the scroll event
+  window.addEventListener('scroll', handleScroll, { passive: true });
 }
 
 /* ---------- Hero typing / deleting effect ---------- */
@@ -173,7 +198,7 @@ function initActiveNavLink() {
         }
       });
     },
-    { threshold: 0.5 }
+    { rootMargin: '-40% 0px -60% 0px', threshold: 0 }
   );
 
   sections.forEach((section) => {
