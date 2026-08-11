@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   setFooterYear();
   initTypingEffect(prefersReducedMotion);
-  initBootSequence(prefersReducedMotion);
+  initBootTerminal(prefersReducedMotion);
   initMobileMenu();
   initScrollReveal(prefersReducedMotion);
   initActiveNavLink();
@@ -96,90 +96,91 @@ function initTypingEffect(prefersReducedMotion) {
   }
 }
 
-function initBootSequence(prefersReducedMotion) {
+function initBootTerminal(prefersReducedMotion) {
   const terminal = document.querySelector('[data-boot-terminal]');
   if (!terminal) return;
 
-  const steps = Array.from(terminal.querySelectorAll('[data-boot-step]'));
+  const steps = [...terminal.querySelectorAll('[data-boot-step]')];
   if (!steps.length) return;
 
+  const TYPE_SPEED = 30;
+  const STEP_START_DELAY = 150;
+  const OUTPUT_DELAY = 180;
+  const AFTER_OUTPUT_DELAY = 360;
+  const BETWEEN_STEPS_DELAY = 220;
+  let started = false;
+
+  const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+  const finishStepImmediately = (step) => {
+    step.classList.add('is-active');
+
+    const command = step.querySelector('.boot-cmd');
+    if (command) command.textContent = command.dataset.cmd || '';
+
+    const output = step.querySelector('[data-boot-output]');
+    if (output) output.classList.add('is-shown');
+
+    const arrow = step.querySelector('.boot-cta-arrow');
+    if (arrow) arrow.classList.add('is-shown');
+  };
+
   if (prefersReducedMotion) {
-    steps.forEach((step) => {
-      const cmdEl = step.querySelector('.boot-cmd');
-      if (cmdEl) cmdEl.textContent = cmdEl.dataset.cmd || '';
-
-      const outputEl = step.querySelector('[data-boot-output]');
-      if (outputEl) outputEl.classList.add('is-shown');
-
-      const cursorEl = step.querySelector('.blink-cursor');
-      if (cursorEl && step.hasAttribute('data-boot-final')) {
-        cursorEl.classList.add('is-active');
-      }
-    });
+    steps.forEach(finishStepImmediately);
     return;
   }
 
-  const CMD_TYPE_SPEED = 32;
-  const STEP_PAUSE = 260;
-  let started = false;
-
-  function typeCommand(cmdEl, cursorEl, onDone) {
-    const text = cmdEl.dataset.cmd || '';
-    let i = 0;
-
-    if (cursorEl) cursorEl.classList.add('is-active');
-
-    function tick() {
-      cmdEl.textContent = text.slice(0, i);
-      i += 1;
-
-      if (i <= text.length) {
-        setTimeout(tick, CMD_TYPE_SPEED);
-      } else {
-        setTimeout(onDone, STEP_PAUSE);
-      }
+  const typeCommand = async (element, text) => {
+    element.textContent = '';
+    for (const character of text) {
+      element.textContent += character;
+      await wait(TYPE_SPEED);
     }
-    tick();
+  };
+
+  const runSequence = async () => {
+    if (started) return;
+    started = true;
+
+    for (const step of steps) {
+      const command = step.querySelector('.boot-cmd');
+      const cursor = step.querySelector('.blink-cursor');
+      const output = step.querySelector('[data-boot-output]');
+      const arrow = step.querySelector('.boot-cta-arrow');
+      const isFinal = step.hasAttribute('data-boot-final');
+
+      step.classList.add('is-active');
+      if (cursor) cursor.classList.add('is-active');
+
+      await wait(STEP_START_DELAY);
+
+      if (command) {
+        await typeCommand(command, command.dataset.cmd || '');
+      }
+
+      await wait(OUTPUT_DELAY);
+
+      if (output) {
+        output.classList.add('is-shown');
+        await wait(AFTER_OUTPUT_DELAY);
+      }
+
+      if (arrow) arrow.classList.add('is-shown');
+
+      if (!isFinal && cursor) cursor.classList.remove('is-active');
+      await wait(BETWEEN_STEPS_DELAY);
+    }
+  };
+
+  if (!('IntersectionObserver' in window)) {
+    runSequence();
+    return;
   }
 
-  function runStep(index) {
-    if (index >= steps.length) return;
-
-    const step = steps[index];
-    const cmdEl = step.querySelector('.boot-cmd');
-    const cursorEl = step.querySelector('.blink-cursor');
-    const outputEl = step.querySelector('[data-boot-output]');
-    const isFinal = step.hasAttribute('data-boot-final');
-
-    if (!cmdEl) {
-      runStep(index + 1);
-      return;
-    }
-
-    typeCommand(cmdEl, cursorEl, () => {
-      if (outputEl) outputEl.classList.add('is-shown');
-
-      if (cursorEl && !isFinal) {
-        cursorEl.classList.remove('is-active');
-      }
-
-      if (isFinal) {
-        const arrowEl = step.querySelector('.boot-cta-arrow');
-        if (arrowEl) arrowEl.classList.add('is-shown');
-      }
-
-      setTimeout(() => runStep(index + 1), STEP_PAUSE);
-    });
-  }
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting && !started) {
-        started = true;
-        runStep(0);
-        observer.disconnect();
-      }
-    });
+  const observer = new IntersectionObserver(([entry]) => {
+    if (!entry.isIntersecting) return;
+    observer.disconnect();
+    runSequence();
   }, { threshold: 0.3 });
 
   observer.observe(terminal);

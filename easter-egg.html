@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>.easter_egg &mdash; vim</title>
+    <link rel="icon" href="favicon.ico">
+    <meta name="robots" content="noindex, nofollow">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&amp;family=Geist:wght@400;600;700&amp;family=Inter:wght@400;500&amp;display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="dist/easter-egg.css">
+  </head>
+  <body class="font-body-md text-body-md h-screen flex flex-col overflow-hidden selection:bg-accent-cyan selection:text-black">
+    <svg aria-hidden="true" focusable="false" style="position: absolute; width: 0; height: 0; overflow: hidden;">
+    <symbol id="icon-briefcase" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="12" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M3 12h18M10 12v2h4v-2"/></symbol>
+    <symbol id="icon-chevron-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></symbol>
+    <symbol id="icon-code-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 9-4 3 4 3m8-6 4 3-4 3m-3-9-2 12"/></symbol>
+    <symbol id="icon-columns" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M12 4v16"/></symbol>
+    <symbol id="icon-corner-up-left" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 14 4 9l5-5"/><path d="M4 9h9a7 7 0 0 1 7 7v4"/></symbol>
+    <symbol id="icon-cpu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9" y="9" width="6" height="6" rx="1"/><path d="M9 2v4m6-4v4M9 18v4m6-4v4M2 9h4m-4 6h4m12-6h4m-4 6h4"/></symbol>
+    <symbol id="icon-external-link" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3h7v7m0-7-10 10"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+    <symbol id="icon-file-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6m-10 5-2 2 2 2m4-4 2 2-2 2"/></symbol>
+    <symbol id="icon-file-json" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8Z"/><path d="M14 2v6h6M9 13c-1 0-1 .8-1 1.5S8 16 7 16m8-3c1 0 1 .8 1 1.5s0 1.5 1 1.5"/></symbol>
+    <symbol id="icon-folder-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6a2 2 0 0 1 2-2h5l2 2h7a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="m9 11-2 2 2 2m6-4 2 2-2 2m-2-5-2 6"/></symbol>
+    <symbol id="icon-git-branch" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="5" r="2"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="7" r="2"/><path d="M6 7v10m2-6h4a6 6 0 0 0 6-6"/></symbol>
+    <symbol id="icon-git-commit" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h6m8 0h6"/><circle cx="12" cy="12" r="4"/></symbol>
+    <symbol id="icon-github" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" stroke="none" d="M12 .8a11.2 11.2 0 0 0-3.54 21.83c.56.1.77-.24.77-.54v-2.1c-3.14.68-3.8-1.33-3.8-1.33-.51-1.3-1.25-1.65-1.25-1.65-1.02-.7.08-.69.08-.69 1.13.08 1.72 1.16 1.72 1.16 1 1.72 2.63 1.22 3.27.93.1-.72.39-1.22.71-1.5-2.5-.29-5.13-1.25-5.13-5.57 0-1.23.44-2.24 1.16-3.03-.12-.29-.5-1.44.11-2.99 0 0 .95-.3 3.08 1.16A10.7 10.7 0 0 1 12 6.1c.95 0 1.9.13 2.8.38 2.13-1.46 3.08-1.16 3.08-1.16.61 1.55.23 2.7.11 2.99.72.79 1.16 1.8 1.16 3.03 0 4.33-2.64 5.28-5.15 5.56.4.35.76 1.04.76 2.12v3.07c0 .3.2.65.78.54A11.2 11.2 0 0 0 12 .8Z"/></symbol>
+    <symbol id="icon-graduation-cap" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m2 10 10-5 10 5-10 5Z"/><path d="M6 12v5c3 2 9 2 12 0v-5M22 10v6"/></symbol>
+    <symbol id="icon-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11.5 12 4l9 7.5"/><path d="M5 10.5V20h14v-9.5"/><path d="M9 20v-6h6v6"/></symbol>
+    <symbol id="icon-linkedin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" stroke="none" d="M6.94 8.5H3.56V20h3.38ZM5.25 3A1.96 1.96 0 1 0 5.25 6.92 1.96 1.96 0 0 0 5.25 3ZM20.44 13.4c0-3.46-1.85-5.07-4.31-5.07-1.99 0-2.88 1.1-3.37 1.87V8.5H9.38V20h3.38v-5.7c0-1.5.29-2.96 2.15-2.96 1.83 0 1.86 1.71 1.86 3.06V20h3.38Z"/></symbol>
+    <symbol id="icon-log-out" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 5H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h5M14 8l4 4-4 4m4-4H9"/></symbol>
+    <symbol id="icon-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></symbol>
+    <symbol id="icon-more-vertical" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/><circle cx="12" cy="19" r="1" fill="currentColor" stroke="none"/></symbol>
+    <symbol id="icon-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-4-4"/></symbol>
+    <symbol id="icon-send" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></symbol>
+    <symbol id="icon-terminal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3m6 0h4"/></symbol>
+    <symbol id="icon-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/></symbol>
+    <symbol id="icon-users" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87m-2-12a4 4 0 0 1 0 7.75"/></symbol>
+    </svg>
+    <!-- Vim status line -->
+    <div class="flex items-center justify-between h-7 px-3 bg-[#0f99da] text-[#001e2f] font-code-sm text-[11px] font-bold shrink-0" id="vim-status">
+      <div class="flex items-center gap-3">
+        <span>-- .easter_egg [readonly] --</span>
+        <span class="hidden sm:inline font-normal opacity-80">you found the hidden branch</span>
+      </div>
+      <a class="flex items-center gap-1.5 px-2 py-0.5 rounded bg-[#001e2f] text-[#8aceff] hover:bg-[#00344e] transition-colors" href="index.html" title="Write and quit &mdash; back to main">
+        <svg class="w-3 h-3" aria-hidden="true" focusable="false"><use href="#icon-corner-up-left"></use></svg> :wq
+      </a>
+    </div>
+    <div class="flex flex-1 min-h-0">
+      <!-- SideNavBar (Activity Bar & Sidebar) -->
+      <aside class="flex h-full flex-shrink-0 z-40 border-r border-outline-variant bg-surface-container-lowest">
+        <!-- Activity Bar -->
+        <nav class="w-activity-bar-width flex flex-col items-center py-4 border-r border-outline-variant bg-surface-container-lowest h-full justify-between">
+          <div class="flex flex-col gap-4 w-full items-center">
+            <div class="w-8 h-8 bg-surface-variant rounded flex items-center justify-center font-headline-md text-headline-md font-bold text-on-surface mb-4" title="D. Alfonso">DA</div>
+            <a class="w-full flex justify-center py-2 border-l-2 border-secondary text-secondary bg-surface-container-low cursor-pointer active:opacity-80" href="#home" title="Home">
+              <svg class="w-6 h-6" aria-hidden="true" focusable="false"><use href="#icon-home"></use></svg>
+            </a>
+            <a class="w-full flex justify-center py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors duration-100 cursor-pointer active:opacity-80" href="#about" title="About">
+              <svg class="w-6 h-6" aria-hidden="true" focusable="false"><use href="#icon-user"></use></svg>
+            </a>
+            <a class="w-full flex justify-center py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors duration-100 cursor-pointer active:opacity-80" href="#experience" title="Experience">
+              <svg class="w-6 h-6" aria-hidden="true" focusable="false"><use href="#icon-briefcase"></use></svg>
+            </a>
+            <a class="w-full flex justify-center py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors duration-100 cursor-pointer active:opacity-80" href="#projects" title="Projects">
+              <svg class="w-6 h-6" aria-hidden="true" focusable="false"><use href="#icon-folder-code"></use></svg>
+            </a>
+            <a class="w-full flex justify-center py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors duration-100 cursor-pointer active:opacity-80" href="#skills" title="Skills">
+              <svg class="w-6 h-6" aria-hidden="true" focusable="false"><use href="#icon-cpu"></use></svg>
+            </a>
+            <a class="w-full flex justify-center py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors duration-100 cursor-pointer active:opacity-80" href="#contact" title="Contact">
+              <svg class="w-6 h-6" aria-hidden="true" focusable="false"><use href="#icon-mail"></use></svg>
+            </a>
+          </div>
+          <div class="flex flex-col gap-4 w-full items-center mb-2">
+            <a class="w-full flex justify-center py-2 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant transition-colors duration-100 cursor-pointer active:opacity-80" href="index.html" title="Back to main">
+              <svg class="w-6 h-6" aria-hidden="true" focusable="false"><use href="#icon-log-out"></use></svg>
+            </a>
+          </div>
+        </nav>
+        <!-- Explorer Sidebar (Hidden on mobile) -->
+        <div class="w-sidebar-width hidden md:flex flex-col bg-surface-container-lowest h-full border-r border-outline-variant font-code-sm text-code-sm">
+          <div class="px-4 py-3 border-b border-outline-variant uppercase tracking-widest text-on-surface-variant font-label-xs text-label-xs">
+            Explorer
+          </div>
+          <div class="p-2 flex-grow overflow-y-auto">
+            <div class="flex items-center gap-1 px-2 py-1 cursor-pointer hover:bg-surface-variant rounded">
+              <svg class="w-4 h-4" aria-hidden="true" focusable="false"><use href="#icon-chevron-down"></use></svg>
+              <span class="font-bold">PORTFOLIO</span>
+            </div>
+            <div class="ml-4 flex flex-col gap-1 mt-1">
+              <a class="flex items-center gap-2 px-2 py-1 text-secondary bg-surface-container-low rounded" href="#home">
+                <svg class="w-4 h-4 text-syntax-js" aria-hidden="true" focusable="false"><use href="#icon-file-code"></use></svg> index.js
+              </a>
+              <a class="flex items-center gap-2 px-2 py-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded" href="#about">
+                <svg class="w-4 h-4 text-syntax-py" aria-hidden="true" focusable="false"><use href="#icon-file-code"></use></svg> about.py
+              </a>
+              <a class="flex items-center gap-2 px-2 py-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded" href="#experience">
+                <svg class="w-4 h-4 text-syntax-ts" aria-hidden="true" focusable="false"><use href="#icon-git-branch"></use></svg> experience.git
+              </a>
+              <a class="flex items-center gap-2 px-2 py-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded" href="#projects">
+                <svg class="w-4 h-4 text-[#f1e05a]" aria-hidden="true" focusable="false"><use href="#icon-file-json"></use></svg> projects.json
+              </a>
+              <a class="flex items-center gap-2 px-2 py-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded" href="#skills">
+                <svg class="w-4 h-4 text-[#e34c26]" aria-hidden="true" focusable="false"><use href="#icon-code-2"></use></svg> skills.yml
+              </a>
+              <a class="flex items-center gap-2 px-2 py-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded" href="#education">
+                <svg class="w-4 h-4 text-[#2b7489]" aria-hidden="true" focusable="false"><use href="#icon-graduation-cap"></use></svg> education.md
+              </a>
+              <a class="flex items-center gap-2 px-2 py-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-variant rounded" href="#contact">
+                <svg class="w-4 h-4 text-accent-cyan" aria-hidden="true" focusable="false"><use href="#icon-terminal"></use></svg> contact.api
+              </a>
+            </div>
+          </div>
+        </div>
+      </aside>
+      <!-- Main Content Area -->
+      <main class="flex-grow flex flex-col h-full relative bg-background min-h-0">
+        <!-- TopNavBar (Editor Tabs) -->
+        <header class="flex items-center justify-between w-full h-10 px-4 bg-surface-container-low border-b border-outline-variant z-30 font-code-sm text-code-sm text-secondary shrink-0">
+          <div class="flex h-full">
+            <div class="flex items-center gap-2 h-full px-3 py-1 text-on-surface border-t-2 border-secondary bg-surface-container-highest cursor-pointer">
+              <svg class="w-4 h-4 text-syntax-js" aria-hidden="true" focusable="false"><use href="#icon-file-code"></use></svg> index.js
+            </div>
+            <div class="flex items-center gap-2 h-full px-3 py-1 text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high transition-all cursor-pointer">
+              <svg class="w-4 h-4 text-syntax-ts" aria-hidden="true" focusable="false"><use href="#icon-git-branch"></use></svg> experience.git
+            </div>
+          </div>
+          <div class="flex items-center gap-4">
+            <div class="hidden md:flex items-center gap-2 bg-surface-container px-3 py-1 rounded border border-outline-variant text-on-surface-variant cursor-pointer hover:bg-surface-variant">
+              <svg class="w-4 h-4" aria-hidden="true" focusable="false"><use href="#icon-search"></use></svg>
+              <span>Ctrl+K</span>
+            </div>
+            <a href="index.html" class="bg-secondary text-on-secondary px-3 py-1 rounded font-bold hover:opacity-90">:wq</a>
+            <div class="flex gap-2">
+              <svg class="w-4 h-4 cursor-pointer hover:text-on-surface" aria-hidden="true" focusable="false"><use href="#icon-columns"></use></svg>
+              <svg class="w-4 h-4 cursor-pointer hover:text-on-surface" aria-hidden="true" focusable="false"><use href="#icon-more-vertical"></use></svg>
+            </div>
+          </div>
+        </header>
+        <!-- Editor Canvas (Scrollable) -->
+        <div class="flex-grow overflow-y-auto pb-10">
+          <div class="max-w-5xl mx-auto p-4 md:p-8 flex flex-col gap-16">
+            <!-- Hero Section (Terminal) -->
+            <section class="w-full rounded border border-outline-variant bg-surface-container-lowest overflow-hidden shadow-lg mt-4 relative" id="home">
+              <div class="bg-surface-container-low px-4 py-2 border-b border-outline-variant flex items-center justify-between font-code-sm text-code-sm text-on-surface-variant">
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4" aria-hidden="true" focusable="false"><use href="#icon-terminal"></use></svg>
+                  <span>bash - dominic@dev-env</span>
+                </div>
+                <button class="text-[10px] uppercase border border-outline-variant px-2 py-0.5 rounded hover:bg-surface-variant">Skip Animation</button>
+              </div>
+              <div class="p-6 font-code-sm text-code-sm font-code-sm text-on-surface min-h-[300px]">
+                <div class="mb-4">
+                  <span class="text-accent-cyan">dominic@dev</span><span class="text-on-surface-variant">:</span><span class="text-syntax-ts">~</span>$ whoami<br/>
+                  <span class="text-on-surface font-bold text-lg mt-1 block">Dominic Alfonso | Software Engineer</span>
+                  <span class="text-on-surface-variant block">CS @ CSULB | May 2027</span>
+                </div>
+                <div class="mb-4">
+                  <span class="text-accent-cyan">dominic@dev</span><span class="text-on-surface-variant">:</span><span class="text-syntax-ts">~</span>$ cat role.txt<br/>
+                  <span class="text-on-surface">Full Stack Intern @ True Anomaly</span>
+                </div>
+                <div class="mb-8">
+                  <span class="text-accent-cyan">dominic@dev</span><span class="text-on-surface-variant">:</span><span class="text-syntax-ts">~</span>$ ./career --status<br/>
+                  <span class="text-on-surface-variant">Loading modules... [OK]</span><br/>
+                  <span class="text-on-surface-variant">Establishing connections... <span class="blinking-cursor">_</span></span>
+                </div>
+                <div class="flex gap-4 mt-8">
+                  <a class="bg-secondary text-on-secondary px-6 py-2 rounded font-bold hover:opacity-90 transition-opacity" href="#projects">View Projects</a>
+                  <a class="border border-outline-variant rounded text-on-surface px-6 py-2 hover:bg-surface-variant transition-colors" href="index.html">Back to main branch</a>
+                </div>
+              </div>
+            </section>
+            <!-- Engineering Impact Strip -->
+            <section class="grid grid-cols-2 md:grid-cols-4 gap-4">
+              <div class="bg-surface-container-low border border-outline-variant p-4 flex flex-col gap-2 rounded">
+                <div class="text-syntax-js font-code-sm text-code-sm">PROCESS_CLEANUP</div>
+                <div class="font-headline-md text-headline-md font-bold">↓ 90%</div>
+                <div class="text-on-surface-variant font-label-xs text-label-xs">Reduced orphaned process footprint</div>
+              </div>
+              <div class="bg-surface-container-low border border-outline-variant p-4 flex flex-col gap-2 rounded">
+                <div class="text-syntax-ts font-code-sm text-code-sm">DATABASE_OPS</div>
+                <div class="font-headline-md text-headline-md font-bold">↓ 65%</div>
+                <div class="text-on-surface-variant font-label-xs text-label-xs">Optimized Beach Theta Tau platform</div>
+              </div>
+              <div class="bg-surface-container-low border border-outline-variant p-4 flex flex-col gap-2 rounded">
+                <div class="text-error font-code-sm text-code-sm">INPUT_ERRORS</div>
+                <div class="font-headline-md text-headline-md font-bold">↓ 35%</div>
+                <div class="text-on-surface-variant font-label-xs text-label-xs">Fixed Razemath hydration defects</div>
+              </div>
+              <div class="bg-surface-container-low border border-outline-variant p-4 flex flex-col gap-2 rounded">
+                <div class="text-accent-cyan font-code-sm text-code-sm">INFERENCE_LATENCY</div>
+                <div class="font-headline-md text-headline-md font-bold">&lt; 80ms</div>
+                <div class="text-on-surface-variant font-label-xs text-label-xs">Robot Dog CV pipeline</div>
+              </div>
+            </section>
+            <!-- About Section (about.py) -->
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8" id="about">
+              <div class="rounded border border-outline-variant bg-surface-container-lowest overflow-hidden font-code-sm text-code-sm">
+                <div class="bg-surface-container-low px-4 py-2 border-b border-outline-variant text-on-surface-variant flex items-center gap-2">
+                  <svg class="w-4 h-4 text-syntax-py" aria-hidden="true" focusable="false">
+                    <use href="#icon-file-code"></use>
+                  </svg>
+                  <span>about.py</span>
+                </div>
+
+                <div class="flex">
+                  <div class="bg-surface-container-low border-r border-outline-variant text-on-surface-variant px-2 py-4 text-right select-none w-12 shrink-0 opacity-50 leading-6">
+                    1<br/>2<br/>3<br/>4<br/>5<br/>6<br/>7<br/>8<br/>9<br/>10<br/>11<br/>12<br/>13<br/>14
+                  </div>
+
+                  <div class="py-4 pl-4 pr-2 overflow-x-auto min-w-0 flex-1">
+                    <pre class="text-on-surface leading-6"><span class="text-syntax-ts">class</span> <span class="text-syntax-js">DominicAlfonso</span>(<span class="text-syntax-py">SoftwareEngineer</span>):
+    <span class="text-syntax-ts">def</span> <span class="text-syntax-js">__init__</span>(<span class="text-on-surface">self</span>):
+        <span class="text-on-surface">self</span>.location = <span class="text-[#a5d6ff]">"Long Beach, CA"</span>
+        <span class="text-on-surface">self</span>.education = <span class="text-[#a5d6ff]">"CSULB"</span>
+        <span class="text-on-surface">self</span>.grad_year = <span class="text-[#79c0ff]">2027</span>
+
+    <span class="text-syntax-ts">@property</span>
+    <span class="text-syntax-ts">def</span> <span class="text-syntax-js">interests</span>(<span class="text-on-surface">self</span>):
+        <span class="text-syntax-ts">return</span> [
+            <span class="text-[#a5d6ff]">"distributed systems"</span>,
+            <span class="text-[#a5d6ff]">"full-stack"</span>,
+            <span class="text-[#a5d6ff]">"CV"</span>,
+            <span class="text-[#a5d6ff]">"robotics"</span>,
+        ]</pre>
+                  </div>
+                </div>
+              </div>
+              <div class="flex flex-col justify-center">
+                <h2 class="font-headline-lg text-headline-lg mb-4">Systems Thinker.</h2>
+                <p class="text-on-surface-variant mb-4">
+                  I build robust, scalable systems that bridge the gap between complex backend logic and seamless user experiences. My focus is on writing clean, maintainable code that solves real-world problems.
+                </p>
+                <p class="text-on-surface-variant">
+                  Currently interning at True Anomaly, where I'm pushing the boundaries of what's possible in space security technology.
+                </p>
+              </div>
+            </section>
+            <!-- Experience (git log) -->
+            <section class="pt-8" id="experience">
+              <div class="flex items-center gap-2 mb-8 font-code-sm text-code-sm text-on-surface-variant border-b border-outline-variant pb-2">
+                <svg class="w-4 h-4" aria-hidden="true" focusable="false"><use href="#icon-git-commit"></use></svg>
+                <span>$ git log --oneline --decorate</span>
+              </div>
+              <div class="relative pl-6 border-l-2 border-outline-variant flex flex-col gap-10">
+                <!-- True Anomaly -->
+                <div class="relative">
+                  <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-accent-cyan border-2 border-surface-container-lowest"></div>
+                  <div class="font-code-sm text-code-sm text-accent-cyan mb-1">commit <span class="font-bold">c8f2a1b</span> (HEAD -&gt; main, origin/main)</div>
+                  <h3 class="font-headline-md text-headline-md mb-1">True Anomaly</h3>
+                  <div class="text-on-surface-variant font-label-xs text-label-xs mb-3">Full Stack Intern | Present</div>
+                  <div class="bg-surface-container-low border border-outline-variant p-4 rounded text-sm text-on-surface-variant">
+                    <ul class="list-disc pl-4 flex flex-col gap-2">
+                      <li><span class="text-syntax-elixir">feat(backend):</span> Addressed Elixir/GenServer race conditions, improving system stability.</li>
+                      <li><span class="text-syntax-ts">fix(ui):</span> Resolved React 19/Next.js hydration issues for a smoother interface.</li>
+                      <li><span class="text-accent-cyan">perf(sys):</span> Delivered SIL/HIL testing improvements resulting in 90% footprint reduction.</li>
+                    </ul>
+                  </div>
+                </div>
+                <!-- RazeMath -->
+                <div class="relative">
+                  <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-outline border-2 border-surface-container-lowest"></div>
+                  <div class="font-code-sm text-code-sm text-outline mb-1">commit <span class="font-bold">3d7e9f2</span></div>
+                  <h3 class="font-headline-md text-headline-md mb-1">RazeMath</h3>
+                  <div class="text-on-surface-variant font-label-xs text-label-xs mb-3">Software Engineering Intern (Full Stack) | Jan 2026</div>
+                  <div class="bg-surface-container-low border border-outline-variant p-4 rounded text-sm text-on-surface-variant">
+                    <ul class="list-disc pl-4 flex flex-col gap-2">
+                      <li><span class="text-syntax-ts">fix(full-stack):</span> Stabilized a mission-critical LaTeX input pipeline in React 19 and Next.js by diagnosing 8 issues across MathLive, KaTeX, hydration, and browser event handling, reducing input errors by 35% in Sentry.</li>
+                      <li><span class="text-accent-cyan">feat(product):</span> Shipped multi-part problem input with 5 labeled subparts and updated the <code>/api/v1/solve-problem/</code> contract to align frontend and backend behavior.</li>
+                      <li><span class="text-syntax-elixir">test(e2e):</span> Added 15 Playwright end-to-end tests and improved math-entry reliability across Chrome, Safari, and Firefox.</li>
+                    </ul>
+                  </div>
+                </div>
+                <!-- Beach Theta Tau -->
+                <div class="relative">
+                  <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-outline border-2 border-surface-container-lowest"></div>
+                  <div class="font-code-sm text-code-sm text-outline mb-1">commit <span class="font-bold">9a3b4c2</span></div>
+                  <h3 class="font-headline-md text-headline-md mb-1">Beach Theta Tau</h3>
+                  <div class="text-on-surface-variant font-label-xs text-label-xs mb-3">Software Engineer (Full Stack) | 2024 - 2026</div>
+                  <div class="bg-surface-container-low border border-outline-variant p-4 rounded text-sm text-on-surface-variant">
+                    <ul class="list-disc pl-4 flex flex-col gap-2">
+                      <li><span class="text-syntax-ts">feat(platform):</span> Designed and deployed a React/TypeScript platform with Firebase and Vercel that centralized recruiting, onboarding, communication, and chapter operations for 50+ active users.</li>
+                      <li><span class="text-accent-cyan">feat(realtime):</span> Built passwordless authentication, role-based access control, real-time synchronization, and an anonymous voting system using Firebase listeners.</li>
+                      <li><span class="text-syntax-elixir">perf(data):</span> Optimized batched, indexed, and cache-aware data access, reducing database operations by approximately 65% per voting event while preserving live results.</li>
+                    </ul>
+                  </div>
+                </div>
+                <!-- Study Hut Tutoring -->
+                <div class="relative">
+                  <div class="absolute -left-[31px] top-1 w-4 h-4 rounded-full bg-outline border-2 border-surface-container-lowest"></div>
+                  <div class="font-code-sm text-code-sm text-outline mb-1">commit <span class="font-bold">1b2c3d4</span></div>
+                  <h3 class="font-headline-md text-headline-md mb-1">Study Hut Tutoring</h3>
+                  <div class="text-on-surface-variant font-label-xs text-label-xs mb-3">K-12 Academic Tutor | 2022 - 2026</div>
+                  <div class="bg-surface-container-low border border-outline-variant p-4 rounded text-sm text-on-surface-variant">
+                    <ul class="list-disc pl-4 flex flex-col gap-2">
+                      <li><span class="text-syntax-ts">teach(stem):</span> Tutored middle and high school students across Algebra, Calculus, Biology, Physics, English, History, and AP Computer Science using individualized learning plans.</li>
+                      <li><span class="text-accent-cyan">improve(scores):</span> Increased student quiz and test performance by an average of approximately 30% and course grades by about 15% through structured problem-solving strategies.</li>
+                      <li><span class="text-syntax-elixir">coach(growth):</span> Introduced weekly goals, progress tracking, and accountability check-ins to strengthen study habits, executive functioning, confidence, and independent problem solving.</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </section>
+            <!-- Projects (projects.json) -->
+            <section class="pt-8" id="projects">
+              <div class="flex items-center gap-2 mb-8 font-code-sm text-code-sm text-on-surface-variant border-b border-outline-variant pb-2">
+                <svg class="w-4 h-4 text-[#f1e05a]" aria-hidden="true" focusable="false">
+                  <use href="#icon-file-json"></use>
+                </svg>
+                <span>projects.json</span>
+              </div>
+
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <!-- Robot Dog -->
+                <article class="bg-surface-container-lowest border border-outline-variant rounded p-6 flex flex-col h-full hover:border-secondary transition-colors group">
+                  <div class="flex justify-between items-start gap-4 mb-4">
+                    <h3 class="font-headline-md text-headline-md text-secondary group-hover:text-accent-cyan transition-colors">
+                      Robot Dog CV
+                    </h3>
+                    <a
+                      href="https://github.com/DalfoDev/dog_ai"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-on-surface-variant hover:text-on-surface transition-colors"
+                      aria-label="Robot Dog CV on GitHub"
+                    >
+                      <svg class="w-5 h-5" aria-hidden="true" focusable="false">
+                        <use href="#icon-github"></use>
+                      </svg>
+                    </a>
+                  </div>
+                  <p class="text-on-surface-variant mb-6 flex-grow">
+                    Hand-gesture recognition for robot control using OpenCV, MediaPipe, and TensorFlow Lite.
+                    The tested pipeline recognizes 10 gestures at roughly 25-30 FPS with sub-80 ms latency.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mt-auto font-code-sm text-xs">
+                    <span class="px-2 py-1 bg-surface-container-low border border-outline-variant rounded text-syntax-py">Python</span>
+                    <span class="px-2 py-1 bg-surface-container-low border border-outline-variant rounded text-accent-cyan">OpenCV</span>
+                    <span class="px-2 py-1 bg-surface-container-low border border-outline-variant rounded text-on-surface-variant">MediaPipe</span>
+                    <span class="px-2 py-1 bg-surface-container-low border border-outline-variant rounded text-on-surface-variant">TFLite</span>
+                  </div>
+                </article>
+
+                <!-- AI Personal Trainer -->
+                <article class="bg-surface-container-lowest border border-outline-variant rounded p-6 flex flex-col h-full hover:border-secondary transition-colors group">
+                  <div class="flex justify-between items-start gap-4 mb-4">
+                    <h3 class="font-headline-md text-headline-md text-secondary group-hover:text-accent-cyan transition-colors">
+                      AI Personal Trainer
+                    </h3>
+                    <a
+                      href="https://github.com/MPhamNguyen/AIPersonalTrainer"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-on-surface-variant hover:text-on-surface transition-colors"
+                      aria-label="AI Personal Trainer on GitHub"
+                    >
+                      <svg class="w-5 h-5" aria-hidden="true" focusable="false">
+                        <use href="#icon-github"></use>
+                      </svg>
+                    </a>
+                  </div>
+                  <p class="text-on-surface-variant mb-6 flex-grow">
+                    Fitness app with a React frontend and FastAPI backend. It uses Gemini and exercise data
+                    to generate workout routines, support coaching chat, and track workout progress.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mt-auto font-code-sm text-xs">
+                    <span class="px-2 py-1 bg-surface-container-low border border-outline-variant rounded text-syntax-ts">React</span>
+                    <span class="px-2 py-1 bg-surface-container-low border border-outline-variant rounded text-syntax-py">FastAPI</span>
+                    <span class="px-2 py-1 bg-surface-container-low border border-outline-variant rounded text-syntax-py">Python</span>
+                    <span class="px-2 py-1 bg-surface-container-low border border-outline-variant rounded text-on-surface-variant">Gemini</span>
+                  </div>
+                </article>
+
+                <!-- Sandman -->
+                <article class="bg-surface-container-lowest border border-outline-variant rounded p-6 flex flex-col h-full hover:border-secondary transition-colors group">
+                  <div class="flex justify-between items-start gap-4 mb-4">
+                    <h3 class="font-headline-md text-headline-md text-secondary group-hover:text-accent-cyan transition-colors">
+                      Sandman
+                    </h3>
+                    <a
+                      href="https://github.com/DalfoDev/sandman"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-on-surface-variant hover:text-on-surface transition-colors"
+                      aria-label="Sandman on GitHub"
+                    >
+                      <svg class="w-5 h-5" aria-hidden="true" focusable="false">
+                        <use href="#icon-github"></use>
+                      </svg>
+                    </a>
+                  </div>
+                  <p class="text-on-surface-variant mb-6 flex-grow">
+                    Arduino-controlled robot built to separate microplastics from sand using a fine mesh filter.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mt-auto font-code-sm text-xs">
+                    <span class="px-2 py-1 bg-surface-container-low border border-outline-variant rounded text-syntax-ts">C++</span>
+                    <span class="px-2 py-1 bg-surface-container-low border border-outline-variant rounded text-on-surface-variant">Arduino</span>
+                    <span class="px-2 py-1 bg-surface-container-low border border-outline-variant rounded text-on-surface-variant">Robotics</span>
+                  </div>
+                </article>
+
+                <!-- Chess -->
+                <article class="bg-surface-container-lowest border border-outline-variant rounded p-6 flex flex-col h-full hover:border-secondary transition-colors group">
+                  <div class="flex justify-between items-start gap-4 mb-4">
+                    <h3 class="font-headline-md text-headline-md text-secondary group-hover:text-accent-cyan transition-colors">
+                      Chess
+                    </h3>
+                    <a
+                      href="https://github.com/DalfoDev/chess"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-on-surface-variant hover:text-on-surface transition-colors"
+                      aria-label="Chess project on GitHub"
+                    >
+                      <svg class="w-5 h-5" aria-hidden="true" focusable="false">
+                        <use href="#icon-github"></use>
+                      </svg>
+                    </a>
+                  </div>
+                  <p class="text-on-surface-variant mb-6 flex-grow">
+                    Interactive chess interface with piece movement, castling, promotion handling, and FEN display.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mt-auto font-code-sm text-xs">
+                    <span class="px-2 py-1 bg-surface-container-low border border-outline-variant rounded text-syntax-ts">JavaScript</span>
+                    <span class="px-2 py-1 bg-surface-container-low border border-outline-variant rounded text-on-surface-variant">OOP</span>
+                    <span class="px-2 py-1 bg-surface-container-low border border-outline-variant rounded text-on-surface-variant">GUI</span>
+                  </div>
+                </article>
+
+                <!-- Tic Tac Toe AI -->
+                <article class="bg-surface-container-lowest border border-outline-variant rounded p-6 flex flex-col h-full hover:border-secondary transition-colors group">
+                  <div class="flex justify-between items-start gap-4 mb-4">
+                    <h3 class="font-headline-md text-headline-md text-secondary group-hover:text-accent-cyan transition-colors">
+                      Tic Tac Toe AI
+                    </h3>
+                    <a
+                      href="https://github.com/DalfoDev/tictactoe.ai"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-on-surface-variant hover:text-on-surface transition-colors"
+                      aria-label="Tic Tac Toe AI on GitHub"
+                    >
+                      <svg class="w-5 h-5" aria-hidden="true" focusable="false">
+                        <use href="#icon-github"></use>
+                      </svg>
+                    </a>
+                  </div>
+                  <p class="text-on-surface-variant mb-6 flex-grow">
+                    Tic Tac Toe with selectable AI difficulty, including a Minimax opponent with alpha-beta pruning.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mt-auto font-code-sm text-xs">
+                    <span class="px-2 py-1 bg-surface-container-low border border-outline-variant rounded text-syntax-py">Python</span>
+                    <span class="px-2 py-1 bg-surface-container-low border border-outline-variant rounded text-on-surface-variant">Minimax</span>
+                    <span class="px-2 py-1 bg-surface-container-low border border-outline-variant rounded text-on-surface-variant">AI</span>
+                  </div>
+                </article>
+
+                <!-- Beach Theta Tau -->
+                <article class="bg-surface-container-lowest border border-outline-variant rounded p-6 flex flex-col h-full hover:border-secondary transition-colors group">
+                  <div class="flex justify-between items-start gap-4 mb-4">
+                    <h3 class="font-headline-md text-headline-md text-secondary group-hover:text-accent-cyan transition-colors">
+                      Beach Theta Tau Website
+                    </h3>
+                    <div class="flex gap-3">
+                      <a
+                        href="https://github.com/BeachThetaTau/Beach-Theta-Tau_Website/tree/main"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-on-surface-variant hover:text-on-surface transition-colors"
+                        aria-label="Beach Theta Tau website on GitHub"
+                      >
+                        <svg class="w-5 h-5" aria-hidden="true" focusable="false">
+                          <use href="#icon-github"></use>
+                        </svg>
+                      </a>
+                      <a
+                        href="https://www.beachthetatau.com"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="text-on-surface-variant hover:text-on-surface transition-colors"
+                        aria-label="Open Beach Theta Tau website"
+                      >
+                        <svg class="w-5 h-5" aria-hidden="true" focusable="false">
+                          <use href="#icon-external-link"></use>
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                  <p class="text-on-surface-variant mb-6 flex-grow">
+                    Responsive React website for Beach Theta Tau with organization information and member-facing pages.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mt-auto font-code-sm text-xs">
+                    <span class="px-2 py-1 bg-surface-container-low border border-outline-variant rounded text-syntax-ts">React</span>
+                    <span class="px-2 py-1 bg-surface-container-low border border-outline-variant rounded text-on-surface-variant">JavaScript</span>
+                    <span class="px-2 py-1 bg-surface-container-low border border-outline-variant rounded text-on-surface-variant">Responsive UI</span>
+                  </div>
+                </article>
+
+                <!-- Calculator -->
+                <article class="bg-surface-container-lowest border border-outline-variant rounded p-6 flex flex-col h-full hover:border-secondary transition-colors group">
+                  <div class="flex justify-between items-start gap-4 mb-4">
+                    <h3 class="font-headline-md text-headline-md text-secondary group-hover:text-accent-cyan transition-colors">
+                      Calculator
+                    </h3>
+                    <a
+                      href="https://github.com/DalfoDev/calculator"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="text-on-surface-variant hover:text-on-surface transition-colors"
+                      aria-label="Calculator project on GitHub"
+                    >
+                      <svg class="w-5 h-5" aria-hidden="true" focusable="false">
+                        <use href="#icon-github"></use>
+                      </svg>
+                    </a>
+                  </div>
+                  <p class="text-on-surface-variant mb-6 flex-grow">
+                    Responsive calculator for basic arithmetic, built with HTML, CSS, and JavaScript.
+                  </p>
+                  <div class="flex flex-wrap gap-2 mt-auto font-code-sm text-xs">
+                    <span class="px-2 py-1 bg-surface-container-low border border-outline-variant rounded text-on-surface-variant">HTML</span>
+                    <span class="px-2 py-1 bg-surface-container-low border border-outline-variant rounded text-on-surface-variant">CSS</span>
+                    <span class="px-2 py-1 bg-surface-container-low border border-outline-variant rounded text-syntax-ts">JavaScript</span>
+                  </div>
+                </article>
+              </div>
+            </section>
+            <!-- Skills (skills.yml) -->
+            <section class="pt-8" id="skills">
+              <div class="flex items-center gap-2 mb-8 font-code-sm text-code-sm text-on-surface-variant border-b border-outline-variant pb-2">
+                <svg class="w-4 h-4 text-[#e34c26]" aria-hidden="true" focusable="false"><use href="#icon-code-2"></use></svg>
+                <span>skills.yml</span>
+              </div>
+              <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 font-code-sm text-sm">
+                <div class="bg-surface-container-lowest border border-outline-variant rounded p-4">
+                  <h4 class="text-secondary mb-3 border-b border-surface-container-high pb-1">Languages</h4>
+                  <ul class="text-on-surface-variant flex flex-col gap-1">
+                    <li>- TypeScript / JavaScript</li>
+                    <li>- Python</li>
+                    <li>- Elixir</li>
+                    <li>- C++</li>
+                  </ul>
+                </div>
+                <div class="bg-surface-container-lowest border border-outline-variant rounded p-4">
+                  <h4 class="text-secondary mb-3 border-b border-surface-container-high pb-1">Web/APIs</h4>
+                  <ul class="text-on-surface-variant flex flex-col gap-1">
+                    <li>- React / Next.js</li>
+                    <li>- Node.js</li>
+                    <li>- REST / GraphQL</li>
+                  </ul>
+                </div>
+                <div class="bg-surface-container-lowest border border-outline-variant rounded p-4">
+                  <h4 class="text-secondary mb-3 border-b border-surface-container-high pb-1">Cloud/Infra/Data</h4>
+                  <ul class="text-on-surface-variant flex flex-col gap-1">
+                    <li>- Firebase</li>
+                    <li>- Docker</li>
+                    <li>- PostgreSQL</li>
+                  </ul>
+                </div>
+                <div class="bg-surface-container-lowest border border-outline-variant rounded p-4">
+                  <h4 class="text-secondary mb-3 border-b border-surface-container-high pb-1">Testing/Observability</h4>
+                  <ul class="text-on-surface-variant flex flex-col gap-1">
+                    <li>- Playwright</li>
+                    <li>- Jest</li>
+                    <li>- SIL/HIL</li>
+                  </ul>
+                </div>
+                <div class="bg-surface-container-lowest border border-outline-variant rounded p-4">
+                  <h4 class="text-secondary mb-3 border-b border-surface-container-high pb-1">ML/CV</h4>
+                  <ul class="text-on-surface-variant flex flex-col gap-1">
+                    <li>- OpenCV</li>
+                    <li>- TensorFlow</li>
+                  </ul>
+                </div>
+                <div class="bg-surface-container-lowest border border-outline-variant rounded p-4">
+                  <h4 class="text-secondary mb-3 border-b border-surface-container-high pb-1">Hardware</h4>
+                  <ul class="text-on-surface-variant flex flex-col gap-1">
+                    <li>- Edge Computing</li>
+                    <li>- Robotics Integration</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+            <!-- Leadership & Education Grid -->
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-8 pt-8" id="education">
+              <!-- Leadership -->
+              <div>
+                <div class="flex items-center gap-2 mb-6 font-code-sm text-code-sm text-on-surface-variant border-b border-outline-variant pb-2">
+                  <svg class="w-4 h-4" aria-hidden="true" focusable="false"><use href="#icon-users"></use></svg>
+                  <span>leadership.md</span>
+                </div>
+                <div class="flex flex-col gap-6">
+                  <div class="border-l-2 border-secondary pl-4 py-1">
+                    <h4 class="font-headline-md text-lg text-on-surface">Theta Tau Treasurer</h4>
+                    <p class="text-on-surface-variant text-sm mt-1">Managed chapter finances, optimizing budget allocation for engineering projects.</p>
+                  </div>
+                  <div class="border-l-2 border-outline-variant pl-4 py-1">
+                    <h4 class="font-headline-md text-lg text-on-surface">Project Sandman Co-Lead</h4>
+                    <p class="text-on-surface-variant text-sm mt-1">Co-led cross-functional engineering team in developing aerospace competition entry.</p>
+                  </div>
+                </div>
+              </div>
+              <!-- Education -->
+              <div>
+                <div class="flex items-center gap-2 mb-6 font-code-sm text-code-sm text-on-surface-variant border-b border-outline-variant pb-2">
+                  <svg class="w-4 h-4 text-[#2b7489]" aria-hidden="true" focusable="false"><use href="#icon-graduation-cap"></use></svg>
+                  <span>education.md</span>
+                </div>
+                <div class="bg-surface-container-lowest border border-outline-variant rounded p-6">
+                  <h3 class="font-headline-md text-xl text-secondary mb-1">California State University, Long Beach</h3>
+                  <div class="font-code-sm text-on-surface-variant mb-4">B.S. Computer Science • May 2027</div>
+                  <ul class="list-disc pl-4 text-on-surface-variant text-sm flex flex-col gap-2">
+                    <li><span class="font-bold text-on-surface">Emphasis:</span> Machine Learning</li>
+                    <li><span class="font-bold text-on-surface">GPA:</span> 3.7</li>
+                    <li><span class="font-bold text-on-surface">Honors:</span> Dean's List, University Honors Program</li>
+                  </ul>
+                </div>
+              </div>
+            </section>
+            <!-- Contact (contact.api) -->
+            <section class="pt-8 pb-16" id="contact">
+              <div class="flex items-center gap-2 mb-8 font-code-sm text-code-sm text-on-surface-variant border-b border-outline-variant pb-2">
+                <svg class="w-4 h-4 text-accent-cyan" aria-hidden="true" focusable="false"><use href="#icon-terminal"></use></svg>
+                <span>contact.api</span>
+              </div>
+              <div class="bg-surface-container-lowest border border-outline-variant rounded p-8 text-center max-w-2xl mx-auto flex flex-col items-center">
+                <svg class="w-12 h-12 text-secondary mb-4" aria-hidden="true" focusable="false"><use href="#icon-mail"></use></svg>
+                <h2 class="font-headline-lg text-2xl mb-4">Let's Connect</h2>
+                <p class="text-on-surface-variant mb-8">
+                  I'm currently looking for new opportunities. Whether you have a question or just want to say hi, I'll try my best to get back to you!
+                </p>
+                <div class="flex gap-4">
+                  <a class="bg-secondary text-on-secondary px-6 py-2 rounded font-bold hover:opacity-90 transition-opacity flex items-center gap-2" href="mailto:dom.alfo@outlook.com">
+                    <svg class="w-4 h-4" aria-hidden="true" focusable="false"><use href="#icon-send"></use></svg> Say Hello
+                  </a>
+                  <div class="flex gap-4 items-center px-4">
+                    <a class="text-on-surface-variant hover:text-secondary transition-colors" href="https://github.com/DalfoDev" target="_blank" rel="noopener noreferrer">
+                      <svg class="w-6 h-6" aria-hidden="true" focusable="false"><use href="#icon-github"></use></svg>
+                    </a>
+                    <a class="text-on-surface-variant hover:text-secondary transition-colors" href="https://www.linkedin.com/in/dominic-alfonso" target="_blank" rel="noopener noreferrer">
+                      <svg class="w-6 h-6" aria-hidden="true" focusable="false"><use href="#icon-linkedin"></use></svg>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
+    <!-- Footer (Status Bar) -->
+    <footer class="w-full flex justify-between items-center px-4 py-1 h-6 z-50 bg-surface-container-lowest border-t border-outline-variant font-label-xs text-label-xs uppercase tracking-widest text-on-surface-variant shrink-0">
+      <div class="flex items-center gap-4">
+        <span class="flex items-center gap-1 text-secondary"><svg class="w-3 h-3" aria-hidden="true" focusable="false"><use href="#icon-git-branch"></use></svg> easter_egg</span>
+        <span class="hidden md:inline">Build: v2.4.0-stable | Branch: easter_egg | Latency: 14ms</span>
+      </div>
+      <div class="flex gap-4">
+        <a class="hover:text-secondary transition-colors flex items-center gap-1" href="index.html">
+          <svg class="w-3 h-3" aria-hidden="true" focusable="false"><use href="#icon-corner-up-left"></use></svg> back to main
+        </a>
+        <a class="hover:text-secondary transition-colors flex items-center gap-1" href="#"><span class="w-2 h-2 rounded-full bg-green-500"></span> Status</a>
+      </div>
+    </footer>
+  </body>
+</html>

@@ -1,17 +1,16 @@
 {
-  "name": "files",
+  "name": "your-repo",
   "version": "1.0.0",
-  "description": "",
-  "main": "script.js",
+  "private": true,
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev:main": "tailwindcss -i ./src/css/main.css -o ./dist/main.css --watch",
+    "dev:egg": "tailwindcss -i ./src/css/easter-egg.css -o ./dist/easter-egg.css --watch",
+    "dev": "npm-run-all --parallel dev:*",
+    "build": "tailwindcss -i ./src/css/main.css -o ./dist/main.css --minify && tailwindcss -i ./src/css/easter-egg.css -o ./dist/easter-egg.css --minify"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs",
   "devDependencies": {
     "@tailwindcss/cli": "^4.3.3",
+    "npm-run-all": "^4.1.5",
     "tailwindcss": "^4.3.3"
   }
 }

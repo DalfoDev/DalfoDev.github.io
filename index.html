@@ -1,15 +1,16 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>&lt;Dominic/&gt; — Software Engineer</title>
+<link rel="icon" href="favicon.ico">
 <meta name="description" content="Dominic Alfonso — Software Engineer portfolio. Projects in AI, web development, and robotics.">
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="output.css">
+<link rel="stylesheet" href="dist/main.css">
 </head>
 
 <body class="bg-ink-950 text-mist-100 font-sans antialiased selection:bg-violet-600/40 selection:text-white">
@@ -51,7 +52,6 @@
     <dialog
       id="mobile-menu"
       class="md:hidden fixed inset-0 z-40 w-full bg-ink-950/98 backdrop-blur-sm opacity-0 pointer-events-none -translate-y-2 transition-all duration-300 m-0 max-w-none max-h-none border-none text-mist-100 p-0"
-      style="height: 100vh; height: 100dvh;"
       aria-label="Mobile navigation"
     >
       <div class="flex h-full w-full flex-col items-start justify-center gap-2 px-10">
@@ -100,7 +100,7 @@
       </div>
 
       <a href="#about" aria-label="Scroll to about section" class="reveal absolute bottom-8 left-1/2 -translate-x-1/2 text-mist-700 hover:text-mist-300 transition-colors">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 animate-bounce-slow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+        <svg class="h-6 w-6 animate-bounce-slow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true">
           <path stroke-linecap="round" stroke-linejoin="round" d="M12 5v14m0 0-6-6m6 6 6-6" />
         </svg>
       </a>
@@ -111,30 +111,7 @@
         <p class="reveal font-mono text-base text-violet-400 mb-3">&lt;about/&gt;</p>
         <h2 class="reveal font-sans text-3xl md:text-4xl font-bold text-mist-100 mb-12">Who I am</h2>
 
-        <div class="reveal hidden md:block overflow-hidden rounded-2xl border border-white/10 bg-ink-900 shadow-2xl shadow-black/40">
-          <div class="flex items-center gap-2 border-b border-white/10 bg-ink-800 px-4 py-3">
-            <span class="h-3 w-3 rounded-full bg-[#ff5f57]"></span>
-            <span class="h-3 w-3 rounded-full bg-[#febc2e]"></span>
-            <span class="h-3 w-3 rounded-full bg-[#28c840]"></span>
-            <span class="ml-4 font-mono text-xs text-mist-500">about_me.py</span>
-          </div>
-          <div class="overflow-x-auto">
-            <pre class="font-mono text-[13px] sm:text-sm leading-7 px-2 py-5 min-w-[760px]"><code
-              ><span class="code-line"><span class="ln">1</span><span class="kw">class</span> <span class="cls">SoftwareEngineer</span>:</span
-              ><span class="code-line"><span class="ln">2</span>&nbsp;&nbsp;&nbsp;&nbsp;<span class="kw">def</span> <span class="fn">__init__</span>(<span class="param">self</span>):</span
-              ><span class="code-line"><span class="ln">3</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="param">self</span>.name = <span class="str">"Dominic Alfonso"</span></span
-              ><span class="code-line"><span class="ln">4</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="param">self</span>.current = <span class="str">"Full Stack SWE Intern @ True Anomaly"</span></span
-              ><span class="code-line"><span class="ln">5</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="param">self</span>.education = <span class="str">"CSULB — B.S. Computer Science, Machine Learning"</span></span
-              ><span class="code-line"><span class="ln">6</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="param">self</span>.graduation = <span class="str">"May 2027"</span></span
-              ><span class="code-line"><span class="ln">7</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="param">self</span>.gpa = <span class="num">3.7</span></span
-              ><span class="code-line"><span class="ln">8</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="param">self</span>.focus = [<span class="str">"full-stack systems"</span>, <span class="str">"machine learning"</span>, <span class="str">"robotics"</span>]</span
-              ><span class="code-line"><span class="ln">9</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="param">self</span>.stack = [<span class="str">"TypeScript"</span>, <span class="str">"Python"</span>, <span class="str">"Java"</span>, <span class="str">"Elixir"</span>, <span class="str">"React"</span>, <span class="str">"Next.js"</span>, <span class="str">"Phoenix LiveView"</span>]</span
-              ><span class="code-line"><span class="ln">10</span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="param">self</span>.tools = [<span class="str">"Docker"</span>, <span class="str">"Kubernetes"</span>, <span class="str">"Firebase"</span>, <span class="str">"PostgreSQL"</span>, <span class="str">"GitHub Actions"</span>]</span
-            ></code></pre>
-          </div>
-        </div>
-
-        <div class="reveal md:hidden overflow-hidden rounded-2xl border border-white/10 bg-ink-900 shadow-2xl shadow-black/40" data-boot-terminal>
+        <div class="reveal overflow-hidden rounded-2xl border border-white/10 bg-ink-900 shadow-2xl shadow-black/40" data-boot-terminal>
           <div class="flex items-center gap-2 border-b border-white/10 bg-ink-800 px-4 py-3">
             <span class="h-3 w-3 rounded-full bg-[#ff5f57]"></span>
             <span class="h-3 w-3 rounded-full bg-[#febc2e]"></span>
@@ -184,10 +161,18 @@
               </div>
             </div>
 
-            <div class="mt-5" data-boot-step data-boot-final>
+            <div class="mt-5" data-boot-step>
               <a href="#projects" class="boot-cta ripple-target">
                 <span class="text-violet-400">$</span>
                 <span class="boot-cmd text-mist-100" data-cmd="cd projects/"></span><span class="blink-cursor text-violet-400" aria-hidden="true">▋</span>
+                <svg viewBox="0 0 24 24" class="boot-cta-arrow" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H18v4.5M18 6l-7.5 7.5M11 6H8a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3"/></svg>
+              </a>
+            </div>
+
+            <div class="mt-3" data-boot-step data-boot-final>
+              <a href="easter-egg.html" class="boot-cta ripple-target" aria-label="Open the easter egg">
+                <span class="text-violet-400">$</span>
+                <span class="boot-cmd text-mist-100" data-cmd="vim .easter_egg"></span><span class="blink-cursor text-violet-400" aria-hidden="true">▋</span>
                 <svg viewBox="0 0 24 24" class="boot-cta-arrow" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13.5 6H18v4.5M18 6l-7.5 7.5M11 6H8a2 2 0 0 0-2 2v8a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-3"/></svg>
               </a>
             </div>
@@ -498,6 +483,6 @@
     <p class="font-mono text-xs text-mist-700">&copy; <span id="year"></span> Dominic Alfonso — built with HTML, Tailwind CSS &amp; vanilla JS.</p>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="src/js/script.js"></script>
 </body>
 </html>
